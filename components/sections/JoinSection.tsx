@@ -11,9 +11,9 @@ const JoinSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px", amount: 0.3 })
 
   const features = [
-    { icon: Code, text: "Access to exclusive workshops", color: "from-cyan-500 to-blue-500" },
-    { icon: Users, text: "Work on real-world projects", color: "from-blue-500 to-purple-500" },
-    { icon: Trophy, text: "Network with industry experts", color: "from-purple-500 to-pink-500" }
+    { icon: Code, text: "Access to exclusive workshops", color: "from-cyan-500 to-blue-500", bgColor: "bg-cyan-500/20" },
+    { icon: Users, text: "Work on real-world projects", color: "from-blue-500 to-purple-500", bgColor: "bg-blue-500/20" },
+    { icon: Trophy, text: "Network with industry experts", color: "from-purple-500 to-pink-500", bgColor: "bg-purple-500/20" }
   ]
 
   return (
@@ -103,12 +103,12 @@ const JoinSection = () => {
                   className="group relative overflow-hidden"
                   style={{ perspective: 1000 }}
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300 rounded-2xl`} />
-                  <div className="relative p-4 sm:p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col items-center justify-center min-h-[140px] sm:min-h-[160px]">
-                    <div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
-                      <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-20 group-hover:opacity-30 blur-xl transition-opacity duration-300 rounded-2xl`} />
+                  <div className={`relative p-4 sm:p-6 md:p-8 rounded-2xl ${feature.bgColor} backdrop-blur-sm border-2 border-white/20 hover:border-cyan-400/60 transition-all duration-300 h-full flex flex-col items-center justify-center min-h-[140px] sm:min-h-[160px]`}>
+                    <div className={`w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 sm:mb-5 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 flex-shrink-0 shadow-lg`}>
+                      <feature.icon className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 text-white drop-shadow-lg" strokeWidth={2.5} />
                     </div>
-                    <p className="text-gray-300 text-xs sm:text-sm md:text-base font-medium text-center break-words px-2">{feature.text}</p>
+                    <p className="text-white text-sm sm:text-base md:text-lg font-semibold text-center break-words px-2">{feature.text}</p>
                   </div>
                 </motion.div>
               ))}
