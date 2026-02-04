@@ -167,6 +167,17 @@ export default function WhoWeArePage() {
                         ease: [0.34, 1.56, 0.64, 1]
                       }}
                       onClick={() => setCurrentImage(index)}
+                      drag="x"
+                      dragConstraints={{ left: 0, right: 0 }}
+                      dragElastic={0.2}
+                      onDragEnd={(e, { offset, velocity }) => {
+                        const swipe = Math.abs(offset.x) * velocity.x;
+                        if (swipe < -500) {
+                          setCurrentImage((prev) => (prev + 1) % images.length);
+                        } else if (swipe > 500) {
+                          setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+                        }
+                      }}
                       style={{
                         transformStyle: "preserve-3d",
                       }}

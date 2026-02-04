@@ -34,7 +34,7 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
       className="fixed inset-0 z-50 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-700 flex items-center justify-center overflow-hidden"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, scale: 1.1 }}
-      transition={{ duration: 1, ease: "easeInOut" }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       {/* Animated Grid Background */}
       <div className="absolute inset-0 cyber-grid opacity-20" />

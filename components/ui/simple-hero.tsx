@@ -52,11 +52,11 @@ export function Component() {
       </AnimatePresence>
 
       {/* Floating Geometric Shapes */}
-      <motion.div className="absolute inset-0 pointer-events-none">
+      <motion.div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-20 h-20 border border-blue-400/30"
+            className="absolute w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 border border-blue-400/30"
             style={{
               left: `${20 + i * 15}%`,
               top: `${30 + (i % 2) * 40}%`,
@@ -76,8 +76,8 @@ export function Component() {
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 flex items-center justify-center h-full">
-        <div className="text-center max-w-5xl px-4">
+      <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6">
+        <div className="text-center max-w-5xl w-full">
           <AnimatePresence mode="wait">
             <motion.div key={`content-${currentSlide}`}>
               <motion.h1 
@@ -104,7 +104,7 @@ export function Component() {
                   ease: [0.76, 0, 0.24, 1],
                   delay: 0.5
                 }}
-                className="text-7xl md:text-9xl font-black text-white mb-8 leading-none"
+                className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-black text-white mb-6 sm:mb-8 leading-tight sm:leading-none"
                 style={{ 
                   textShadow: "0 0 30px rgba(59,130,246,0.5)",
                   transformStyle: "preserve-3d"
@@ -142,7 +142,7 @@ export function Component() {
                   ease: "backOut",
                   delay: 0.8
                 }}
-                className="text-2xl md:text-3xl text-gray-200 font-light max-w-4xl mx-auto"
+                className="text-base sm:text-lg md:text-2xl lg:text-3xl text-gray-200 font-light max-w-4xl mx-auto px-4"
                 style={{ transformStyle: "preserve-3d" }}
               >
                 {slides[currentSlide].description}
@@ -153,12 +153,12 @@ export function Component() {
       </div>
 
       {/* Navigation */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-4 z-10">
+      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-wrap justify-center gap-2 sm:gap-4 z-10 px-4 max-w-full">
         {slides.map((slide, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+            className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
               index === currentSlide 
                 ? 'bg-green-400 text-black' 
                 : 'bg-white/20 text-white/70 hover:bg-white/30'
