@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-dark-base text-text-body antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-text-primary;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-dark-card/60 backdrop-blur-xl border border-border-blue rounded-2xl shadow-inner-blue;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-3 rounded-lg bg-accent-blue text-white font-medium transition-all duration-300 ease-out shadow-glow-blue;
+  }
+  
+  .btn-primary:hover {
+    @apply bg-accent-blue-dark shadow-glow-cyan transform scale-105;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-lg border border-border-blue bg-dark-elevated/50 text-accent-blue-bright font-medium transition-all duration-300 ease-out;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-accent-blue/10 border-accent-blue shadow-glow-blue;
+  }
+
+  .transform-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .blue-gradient {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+  }
+
+  .blue-text-gradient {
+    background: linear-gradient(135deg, #3b82f6, #06b6d4, #22d3ee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
