@@ -49,7 +49,6 @@ export const ThreeDMarquee = ({
               left: "65%",
               width: "100%",
               height: "100%",
-              transform: "translate(-35%, -25%) rotateX(50deg) rotateZ(-45deg)",
             }}
             className="grid grid-cols-4 gap-12"
           >

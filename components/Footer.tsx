@@ -8,8 +8,7 @@ import {
   textReveal,
   parallaxSlow,
   viewportConfig,
-  easing,
-  softEasing 
+  easing
 } from '@/lib/animations'
 
 const Footer = () => {
@@ -38,7 +37,7 @@ const Footer = () => {
       x: 0,
       transition: { 
         duration: 0.6, 
-        ease: softEasing 
+        ease: easing 
       }
     }
   }
