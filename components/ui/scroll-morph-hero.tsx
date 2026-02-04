@@ -11,8 +11,8 @@ interface FlipCardProps {
     target: { x: number; y: number; rotation: number; scale: number; opacity: number };
 }
 
-const IMG_WIDTH = 60;
-const IMG_HEIGHT = 85;
+const IMG_WIDTH = 80;
+const IMG_HEIGHT = 110;
 
 function FlipCard({ src, index, target }: FlipCardProps) {
     return (
@@ -137,7 +137,7 @@ export default function IntroAnimation() {
     return (
         <div ref={containerRef} className="relative w-full h-full bg-transparent overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black via-black/50 to-transparent pointer-events-none z-20" />
-            <div className="flex h-full w-full flex-col items-center justify-center">
+            <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden px-4">
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -168,36 +168,38 @@ export default function IntroAnimation() {
                     </p>
                 </motion.div>
 
-                <div className="relative flex items-center justify-center w-full h-full">
+                <div className="relative flex items-center justify-center w-full h-full overflow-hidden">
                     {IMAGES.slice(0, TOTAL_IMAGES).map((src, i) => {
                         let target = { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1 };
 
                         if (phase === "scatter") {
                             target = scatterPositions[i];
                         } else if (phase === "line") {
-                            const lineSpacing = 70;
+                            const isMobile = containerSize.width < 768;
+                            const lineSpacing = isMobile ? 90 : 70;
                             const lineTotalWidth = TOTAL_IMAGES * lineSpacing;
                             const lineX = i * lineSpacing - lineTotalWidth / 2;
-                            target = { x: lineX, y: 0, rotation: 0, scale: 1, opacity: 1 };
+                            target = { x: lineX, y: 0, rotation: 0, scale: isMobile ? 1.2 : 1, opacity: 1 };
                         } else if (phase === "circle") {
+                            const isMobile = containerSize.width < 768;
                             const minDimension = Math.min(containerSize.width, containerSize.height);
-                            const circleRadius = Math.min(minDimension * 0.35, 350);
+                            const circleRadius = isMobile ? Math.min(minDimension * 0.3, 200) : Math.min(minDimension * 0.35, 350);
                             const circleAngle = (i / TOTAL_IMAGES) * 360;
                             const circleRad = (circleAngle * Math.PI) / 180;
                             target = {
                                 x: Math.cos(circleRad) * circleRadius,
                                 y: Math.sin(circleRad) * circleRadius,
                                 rotation: circleAngle + 90,
-                                scale: 1,
+                                scale: isMobile ? 1.1 : 1,
                                 opacity: 1,
                             };
                         } else if (phase === "arc") {
                             const isMobile = containerSize.width < 768;
-                            const baseRadius = Math.min(containerSize.width, containerSize.height * 1.5);
-                            const arcRadius = baseRadius * (isMobile ? 1.4 : 1.1);
-                            const arcApexY = containerSize.height * (isMobile ? 0.35 : 0.25);
+                            const baseRadius = Math.min(containerSize.width * 0.9, containerSize.height * 1.2);
+                            const arcRadius = baseRadius * (isMobile ? 1.2 : 1.1);
+                            const arcApexY = containerSize.height * (isMobile ? 0.4 : 0.25);
                             const arcCenterY = arcApexY + arcRadius;
-                            const spreadAngle = isMobile ? 100 : 130;
+                            const spreadAngle = isMobile ? 90 : 130;
                             const startAngle = -90 - (spreadAngle / 2);
                             const step = spreadAngle / (TOTAL_IMAGES - 1);
                             const currentArcAngle = startAngle + (i * step);
@@ -207,7 +209,7 @@ export default function IntroAnimation() {
                                 x: Math.cos(arcRad) * arcRadius,
                                 y: Math.sin(arcRad) * arcRadius + arcCenterY,
                                 rotation: currentArcAngle + 90,
-                                scale: isMobile ? 1.4 : 1.8,
+                                scale: isMobile ? 1.3 : 1.8,
                                 opacity: 1,
                             };
                         }

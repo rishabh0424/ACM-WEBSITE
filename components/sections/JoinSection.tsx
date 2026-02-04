@@ -92,7 +92,7 @@ const JoinSection = () => {
             </motion.p>
 
             {/* Features Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12 px-2">
               {features.map((feature, index) => (
                 <motion.div
                   key={index}
@@ -104,11 +104,11 @@ const JoinSection = () => {
                   style={{ perspective: 1000 }}
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300 rounded-2xl`} />
-                  <div className="relative p-4 sm:p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col items-center justify-center">
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
-                      <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
+                  <div className="relative p-4 sm:p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col items-center justify-center min-h-[140px] sm:min-h-[160px]">
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
+                      <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                     </div>
-                    <p className="text-gray-300 text-sm sm:text-base md:text-lg font-medium text-center break-words">{feature.text}</p>
+                    <p className="text-gray-300 text-xs sm:text-sm md:text-base font-medium text-center break-words px-2">{feature.text}</p>
                   </div>
                 </motion.div>
               ))}

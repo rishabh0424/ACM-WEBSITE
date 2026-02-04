@@ -76,8 +76,8 @@ export function Component() {
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6 py-20">
-        <div className="text-center max-w-5xl w-full overflow-hidden">
+      <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6 py-12 sm:py-20">
+        <div className="text-center max-w-5xl w-full overflow-hidden px-2">
           <AnimatePresence mode="wait">
             <motion.div key={`content-${currentSlide}`}>
               <motion.h1 
@@ -104,12 +104,13 @@ export function Component() {
                   ease: [0.76, 0, 0.24, 1],
                   delay: 0.5
                 }}
-                className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-black text-white mb-6 sm:mb-8 leading-tight break-words"
+                className="text-3xl sm:text-5xl md:text-7xl lg:text-9xl font-black text-white mb-4 sm:mb-6 md:mb-8 leading-tight px-2"
                 style={{ 
                   textShadow: "0 0 30px rgba(59,130,246,0.5)",
                   transformStyle: "preserve-3d",
                   wordBreak: "break-word",
-                  overflowWrap: "break-word"
+                  overflowWrap: "break-word",
+                  hyphens: "auto"
                 }}
               >
                 <motion.span
@@ -144,11 +145,12 @@ export function Component() {
                   ease: "backOut",
                   delay: 0.8
                 }}
-                className="text-base sm:text-lg md:text-2xl lg:text-3xl text-gray-200 font-light max-w-4xl mx-auto px-4 break-words"
+                className="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-200 font-light max-w-4xl mx-auto px-2 sm:px-4"
                 style={{ 
                   transformStyle: "preserve-3d",
                   wordBreak: "break-word",
-                  overflowWrap: "break-word"
+                  overflowWrap: "break-word",
+                  hyphens: "auto"
                 }}
               >
                 {slides[currentSlide].description}
@@ -159,14 +161,14 @@ export function Component() {
       </div>
 
       {/* Navigation */}
-      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-wrap justify-center gap-2 sm:gap-4 z-10 px-4 max-w-full">
+      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-wrap justify-center gap-2 sm:gap-4 z-10 px-2 sm:px-4 w-full max-w-full">
         {slides.map((slide, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+            className={`px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-full text-[10px] sm:text-xs md:text-sm font-medium transition-all whitespace-nowrap ${
               index === currentSlide 
-                ? 'bg-green-400 text-black' 
+                ? 'bg-blue-400 text-black' 
                 : 'bg-white/20 text-white/70 hover:bg-white/30'
             }`}
           >

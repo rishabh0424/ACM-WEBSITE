@@ -17,20 +17,21 @@ import JoinSection from '@/components/sections/JoinSection'
 import Footer from '@/components/Footer'
 
 export default function HomePage() {
-  const [showLightning, setShowLightning] = useState(true)
+  const [showLightning, setShowLightning] = useState(false)
   const [showIntro, setShowIntro] = useState(false)
-  const [introComplete, setIntroComplete] = useState(false)
+  const [introComplete, setIntroComplete] = useState(true)
 
   useEffect(() => {
+    const hasSeenIntro = localStorage.getItem('acm-intro-seen')
+    if (hasSeenIntro) {
+      setIntroComplete(true)
+      return
+    }
+    
+    setShowLightning(true)
     const timer = setTimeout(() => {
       setShowLightning(false)
-      
-      const hasSeenIntro = localStorage.getItem('acm-intro-seen')
-      if (!hasSeenIntro) {
-        setShowIntro(true)
-      } else {
-        setIntroComplete(true)
-      }
+      setShowIntro(true)
     }, 8000)
     return () => clearTimeout(timer)
   }, [])
