@@ -72,18 +72,21 @@ export default function WhoWeArePage() {
         >
           <motion.button
             onClick={() => router.back()}
-            className="fixed top-8 left-8 z-50 flex items-center gap-2 px-4 py-2 bg-dark-card/80 backdrop-blur-md border border-blue-500/30 rounded-lg text-blue-400 hover:text-blue-300 hover:border-blue-400/50 transition-all"
+            className="fixed top-6 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-dark-card/80 backdrop-blur-md border border-blue-500/30 rounded-lg text-blue-400 hover:text-blue-300 hover:border-blue-400/50 transition-all"
             whileHover={{ x: -5, scale: 1.05 }}
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
           >
             <ArrowLeft className="w-5 h-5" />
-            Back to Home
+            BACK
           </motion.button>
 
           <motion.h1
-            className="text-7xl md:text-9xl font-bold mb-6 blue-text-gradient"
+            className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-6 blue-text-gradient mt-16 sm:mt-0"
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0 }}
           >
             Who We Are
           </motion.h1>
@@ -120,11 +123,11 @@ export default function WhoWeArePage() {
         ))}
       </section>
 
-      {/* 3D Rotating Album Section */}
+      {/* Ultra Modern Image Slider Section */}
       <section className="py-24 px-4 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <motion.h2
-            className="text-4xl md:text-5xl font-bold text-center mb-32 text-white"
+            className="text-4xl md:text-5xl font-bold text-center mb-16 text-white"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -132,105 +135,217 @@ export default function WhoWeArePage() {
             Our Journey
           </motion.h2>
 
-          <div className="flex flex-col md:flex-row items-start justify-center gap-20">
-            {/* 3D Rotating Album */}
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16">
+            {/* Ultra Modern Slider with Parallax */}
             <motion.div
-              className="relative w-full md:w-1/2 max-w-md h-[350px] md:h-[400px] flex-shrink-0"
+              className="relative w-full lg:w-1/2 max-w-3xl"
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div 
-                className="relative w-full h-full flex items-center justify-center"
-                style={{ 
-                  perspective: "1500px",
-                  transformStyle: "preserve-3d"
-                }}
-              >
-                {images.map((img, index) => {
-                  const angle = (360 / images.length) * (index - currentImage);
-                  const isActive = index === currentImage;
-                  
-                  return (
-                    <motion.div
-                      key={index}
-                      className="absolute w-full h-full cursor-pointer"
-                      initial={false}
-                      animate={{
-                        rotateY: angle,
-                        scale: isActive ? 1 : 0.65,
-                        opacity: isActive ? 1 : 0.3,
-                        zIndex: isActive ? 10 : 1,
-                      }}
-                      transition={{ 
-                        duration: 0.8,
-                        ease: [0.34, 1.56, 0.64, 1]
-                      }}
-                      onClick={() => setCurrentImage(index)}
-                      drag="x"
-                      dragConstraints={{ left: 0, right: 0 }}
-                      dragElastic={0.2}
-                      onDragEnd={(e, { offset, velocity }) => {
-                        const swipe = Math.abs(offset.x) * velocity.x;
-                        if (swipe < -500) {
-                          setCurrentImage((prev) => (prev + 1) % images.length);
-                        } else if (swipe > 500) {
-                          setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
-                        }
-                      }}
-                      style={{
-                        transformStyle: "preserve-3d",
-                      }}
-                    >
-                      <div
-                        className="w-full h-full rounded-2xl overflow-hidden shadow-2xl border-4 border-blue-500/30 bg-cover bg-center"
-                        style={{
-                          backgroundImage: `url(${img})`,
-                          transform: "translateZ(280px)",
-                        }}
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      </div>
-                    </motion.div>
-                  );
-                })}
+              {/* Main Image Container with Glow */}
+              <div className="relative">
+                {/* Animated Glow Effect */}
+                <motion.div
+                  className="absolute -inset-4 bg-gradient-to-r from-blue-600/30 via-purple-600/30 to-pink-600/30 rounded-3xl blur-3xl"
+                  animate={{
+                    opacity: [0.3, 0.6, 0.3],
+                    scale: [1, 1.05, 1],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+
+                <div className="relative aspect-[16/10] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 to-black touch-pan-y">
+                  {/* Main Image with Advanced Transitions */}
+                  <motion.div
+                    key={currentImage}
+                    initial={{ opacity: 0, scale: 1.2, x: 100, filter: "blur(20px)" }}
+                    animate={{ opacity: 1, scale: 1, x: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, scale: 0.8, x: -100, filter: "blur(20px)" }}
+                    transition={{ 
+                      duration: 0.7, 
+                      ease: [0.16, 1, 0.3, 1],
+                      scale: { duration: 0.6 },
+                      filter: { duration: 0.5 }
+                    }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.2}
+                    onDragEnd={(e, { offset, velocity }) => {
+                      const swipe = offset.x * velocity.x;
+                      if (swipe < -10000) {
+                        setCurrentImage((prev) => (prev + 1) % images.length);
+                      } else if (swipe > 10000) {
+                        setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+                      }
+                    }}
+                    className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing"
+                  >
+                    <img
+                      src={images[currentImage]}
+                      alt={`Gallery ${currentImage + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Gradient Overlays */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 mix-blend-overlay" />
+                  </motion.div>
+
+                  {/* Sleek Navigation Arrows - Hidden on Mobile */}
+                  <motion.button
+                    onClick={() => setCurrentImage((prev) => (prev - 1 + images.length) % images.length)}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 hidden md:flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all z-10 group"
+                    whileHover={{ scale: 1.1, x: -4 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <svg className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </motion.button>
+                  <motion.button
+                    onClick={() => setCurrentImage((prev) => (prev + 1) % images.length)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 hidden md:flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all z-10 group"
+                    whileHover={{ scale: 1.1, x: 4 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <svg className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </motion.button>
+
+                  {/* Modern Counter Badge */}
+                  <motion.div 
+                    className="absolute top-4 sm:top-6 right-4 sm:right-6 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-white text-xs sm:text-sm font-semibold z-10"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <span className="text-blue-400">{currentImage + 1}</span>
+                    <span className="text-white/50 mx-1">/</span>
+                    <span className="text-white/70">{images.length}</span>
+                  </motion.div>
+
+                  {/* Swipe Indicator for Mobile */}
+                  <motion.div
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-white/70 text-xs z-10 md:hidden"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                    </svg>
+                    <span>Swipe</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </motion.div>
+                </div>
               </div>
 
-              {/* Navigation Dots */}
-              <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex gap-3">
-                {images.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentImage(index)}
-                    className={`w-3 h-3 rounded-full transition-all ${
-                      index === currentImage
-                        ? "bg-blue-500 w-8"
-                        : "bg-gray-600 hover:bg-gray-500"
-                    }`}
+              {/* Modern Thumbnail Strip with Parallax */}
+              <motion.div 
+                className="relative mt-4 sm:mt-6 px-2"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory">
+                  {images.map((img, index) => {
+                    const isActive = index === currentImage;
+                    const distance = Math.abs(index - currentImage);
+                    
+                    return (
+                      <motion.button
+                        key={index}
+                        onClick={() => setCurrentImage(index)}
+                        className="relative flex-shrink-0 group snap-center"
+                        animate={{
+                          scale: isActive ? 1 : 0.85,
+                          opacity: isActive ? 1 : 0.5,
+                        }}
+                        whileHover={{ scale: isActive ? 1.05 : 0.9, opacity: 1 }}
+                        whileTap={{ scale: 0.85 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        <div className={`relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl sm:rounded-2xl overflow-hidden ${
+                          isActive ? "ring-2 ring-blue-500 ring-offset-2 ring-offset-black" : ""
+                        }`}>
+                          <img
+                            src={img}
+                            alt={`Thumbnail ${index + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                          {!isActive && (
+                            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors" />
+                          )}
+                          {isActive && (
+                            <motion.div
+                              className="absolute inset-0 border-2 border-blue-500"
+                              layoutId="activeThumbnail"
+                              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                            />
+                          )}
+                        </div>
+                      </motion.button>
+                    );
+                  })}
+                </div>
+
+                {/* Progress Bar */}
+                <div className="mt-3 sm:mt-4 h-0.5 sm:h-1 bg-white/5 rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+                    initial={{ width: "0%" }}
+                    animate={{ width: `${((currentImage + 1) / images.length) * 100}%` }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   />
-                ))}
-              </div>
+                </div>
+              </motion.div>
             </motion.div>
 
-            {/* Content */}
+            {/* Content with Stagger Animation */}
             <motion.div
-              className="w-full md:w-1/2 space-y-6 mt-16 md:mt-0"
+              className="w-full lg:w-1/2 space-y-6"
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
             >
-              <h3 className="text-4xl font-bold text-white mb-4">
+              <motion.h3 
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+              >
                 Building Tomorrow's Tech Leaders
-              </h3>
-              <p className="text-lg text-gray-300 leading-relaxed">
+              </motion.h3>
+              <motion.p 
+                className="text-base sm:text-lg text-gray-300 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+              >
                 Since our inception, we've been dedicated to fostering a community where
                 innovation thrives and knowledge is shared freely. Our journey has been
                 marked by countless workshops, hackathons, and collaborative projects.
-              </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
+              </motion.p>
+              <motion.p 
+                className="text-base sm:text-lg text-gray-300 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+              >
                 We believe in hands-on learning, mentorship, and creating opportunities
                 for every member to grow and excel in their tech journey.
-              </p>
+              </motion.p>
             </motion.div>
           </div>
         </div>

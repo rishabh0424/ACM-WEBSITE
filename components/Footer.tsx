@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Github, Linkedin, Twitter, Instagram, Mail, MapPin, Hexagon, MessageSquare } from 'lucide-react'
 import { SocialCard } from '@/components/ui/social-card'
+import { NeonQrButton } from '@/components/ui/nova-qrbutton'
 import { 
   staggerContainer, 
   cardVariant, 
@@ -222,7 +223,7 @@ const Footer = () => {
               socialLinks={[
                 { href: 'https://www.instagram.com/acm_bu/', icon: <Instagram className="w-6 h-6" />, className: 'box1' },
                 { href: 'https://twitter.com/acm_chapter', icon: <Twitter className="w-6 h-6" />, className: 'box2', delay: '0.2s' },
-                { href: 'https://github.com/acm-chapter', icon: <Github className="w-6 h-6" />, className: 'box3', delay: '0.4s' },
+                { href: '#', icon: <NeonQrButton />, className: 'box3', delay: '0.4s' },
               ]}
             />
           </motion.div>

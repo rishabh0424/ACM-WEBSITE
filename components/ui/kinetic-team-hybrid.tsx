@@ -160,22 +160,27 @@ function TeamRow({
       transition={{ duration: 0.4, delay: index * 0.05 }}
       onMouseEnter={() => !isMobile && setActiveId(data.id)}
       onMouseLeave={() => !isMobile && setActiveId(null)}
-      onClick={() => {
-        if (isMobile) {
-          if (isActive && data.instagram) {
-            window.open(data.instagram, '_blank');
-          } else {
-            setActiveId(isActive ? null : data.id);
-          }
-        } else if (data.instagram) {
-          window.open(data.instagram, '_blank');
-        }
-      }}
       className={`group relative border-t border-yellow-500/10 transition-colors duration-500 last:border-b active:bg-blue-500/5 ${
         isMobile ? 'cursor-pointer' : 'cursor-pointer hover:bg-blue-500/5'
       }`}
     >
-      <div className="relative z-10 flex flex-col py-5 md:py-6 lg:py-10">
+      <div 
+        className="relative z-10 flex flex-col py-5 md:py-6 lg:py-10"
+        onClick={(e) => {
+          if (isMobile) {
+            const target = e.target as HTMLElement;
+            if (target.closest('.toggle-icon')) {
+              setActiveId(isActive ? null : data.id);
+            } else if (isActive && data.instagram) {
+              window.open(data.instagram, '_blank');
+            } else if (!isActive) {
+              setActiveId(data.id);
+            }
+          } else if (data.instagram) {
+            window.open(data.instagram, '_blank');
+          }
+        }}
+      >
         
         <div className="flex items-baseline gap-3 md:gap-4 lg:gap-12 pl-2 md:pl-0 transition-transform duration-500 group-hover:translate-x-2 md:group-hover:translate-x-4">
           <span className="font-mono text-[10px] md:text-xs text-yellow-600 min-w-[18px] md:min-w-[24px]">
@@ -191,7 +196,7 @@ function TeamRow({
             {data.role}
           </span>
           
-          <div className="block md:hidden text-yellow-500">
+          <div className="toggle-icon block md:hidden text-yellow-500" onClick={(e) => e.stopPropagation()}>
             {isActive ? <Minus size={16} /> : <Plus size={16} />}
           </div>
 
@@ -214,11 +219,11 @@ function TeamRow({
             className="overflow-hidden bg-yellow-500/5"
           >
             <div className="p-3 md:p-4">
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-blue-500/20">
+              <div className="relative w-full overflow-hidden rounded-lg border border-blue-500/20" style={{ paddingBottom: '56.25%' }}>
                 <Image 
                   src={data.image} 
                   alt={data.name} 
-                  className="h-full w-full object-cover" 
+                  className="absolute inset-0 w-full h-full object-contain bg-gray-900" 
                   fill
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />

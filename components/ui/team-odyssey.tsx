@@ -384,18 +384,19 @@ export const TeamOdyssey: React.FC<TeamOdysseyProps> = ({
       {/* Close Button */}
       <motion.button
         onClick={onClose}
-        className="absolute top-6 right-6 w-14 h-14 rounded-full bg-white/5 backdrop-blur-md hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center group z-50"
+        className="absolute top-4 left-4 md:top-6 md:left-6 flex items-center gap-2 px-4 py-2 md:px-5 md:py-3 rounded-full bg-white/5 backdrop-blur-md hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 group z-50"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2 }}
       >
-        <X className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" />
+        <X className="w-4 h-4 md:w-5 md:h-5 text-white/70 group-hover:text-white transition-colors" />
+        <span className="text-sm md:text-base font-medium text-white/70 group-hover:text-white transition-colors">Back</span>
       </motion.button>
 
       {/* Main container */}
-      <div className="relative z-20 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 h-screen flex flex-col justify-center overflow-y-auto scrollbar-hide select-none">
+      <div className="relative z-20 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 md:py-12 h-screen flex flex-col justify-center overflow-y-auto scrollbar-hide select-none">
         <style jsx>{`
           .scrollbar-hide::-webkit-scrollbar {
             display: none;
@@ -412,12 +413,12 @@ export const TeamOdyssey: React.FC<TeamOdysseyProps> = ({
           className="relative z-30 flex flex-col items-center text-center w-full space-y-12"
         >
           {/* Title Section */}
-          <div className="space-y-4 max-w-4xl">
+          <div className="space-y-4 max-w-4xl mt-24 md:mt-0">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.6 }}
-              className="text-6xl md:text-8xl font-display font-bold tracking-tight select-none"
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-display font-bold tracking-tight select-none px-4"
               style={{
                 background: `linear-gradient(135deg, hsl(${smoothHue}, 70%, 60%), #F8FAFC)`,
                 WebkitBackgroundClip: 'text',
@@ -433,7 +434,7 @@ export const TeamOdyssey: React.FC<TeamOdysseyProps> = ({
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
               className="text-lg md:text-xl text-text-muted font-light leading-relaxed"
             >
               {teamDescription}
