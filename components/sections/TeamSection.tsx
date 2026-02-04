@@ -300,7 +300,7 @@ const TeamCard = ({ member, index, onClick }: { member: TeamMember; index: numbe
       onMouseMove={handleMouseMove}
     >
       <motion.div
-        className="relative p-10 rounded-3xl backdrop-blur-md bg-gray-900/20 border border-gray-800/50 hover:border-blue-500/60 transition-all duration-500 h-full overflow-hidden"
+        className="relative p-6 md:p-10 rounded-3xl backdrop-blur-md bg-gray-900/20 border border-gray-800/50 hover:border-blue-500/60 transition-all duration-500 h-full overflow-hidden"
         whileHover={{ 
           scale: 1.02,
           rotateY: 5,
@@ -338,7 +338,7 @@ const TeamCard = ({ member, index, onClick }: { member: TeamMember; index: numbe
         />
 
         {/* Thunder Particles */}
-        {[...Array(3)].map((_, i) => (
+        {typeof window !== 'undefined' && window.innerWidth >= 768 && [...Array(3)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100"
@@ -375,38 +375,38 @@ const TeamCard = ({ member, index, onClick }: { member: TeamMember; index: numbe
             </div>
             
             {/* Profile Picture */}
-            <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-transparent">
+            <div className="relative w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden border-2 border-transparent">
               <Image
                 src={member.image}
                 alt={`${member.name} - ${member.role}`}
                 fill
                 className="object-cover"
-                sizes="112px"
+                sizes="(max-width: 768px) 80px, 112px"
               />
             </div>
           </motion.div>
         </div>
 
         {/* Member Info */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-4 md:mb-6">
           <motion.h3 
-            className="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors duration-300"
+            className="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-blue-400 transition-colors duration-300"
             whileHover={{ scale: 1.05 }}
           >
             {member.name}
           </motion.h3>
-          <p className="text-blue-400 font-semibold text-sm uppercase tracking-wider mb-4">
+          <p className="text-blue-400 font-semibold text-xs md:text-sm uppercase tracking-wider mb-3 md:mb-4">
             {member.role}
           </p>
           {member.bio && (
-            <p className="text-gray-400 text-sm leading-relaxed font-light">
+            <p className="text-gray-400 text-xs md:text-sm leading-relaxed font-light">
               {member.bio}
             </p>
           )}
         </div>
 
         {/* Social Icons */}
-        <div className="flex justify-center space-x-4">
+        <div className="flex justify-center space-x-3 md:space-x-4">
           {Object.entries(member.social).map(([platform, url]) => {
             const IconComponent = socialIcons[platform as keyof typeof socialIcons]
             if (!IconComponent || !url) return null
@@ -417,7 +417,7 @@ const TeamCard = ({ member, index, onClick }: { member: TeamMember; index: numbe
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-gray-900/50 border border-gray-700/50 flex items-center justify-center text-gray-400 hover:text-blue-400 hover:border-blue-400/60 hover:bg-blue-400/10 transition-all duration-300"
+                className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-gray-900/50 border border-gray-700/50 flex items-center justify-center text-gray-400 hover:text-blue-400 hover:border-blue-400/60 hover:bg-blue-400/10 transition-all duration-300"
                 whileHover={{ 
                   scale: 1.1, 
                   y: -2,
@@ -426,7 +426,7 @@ const TeamCard = ({ member, index, onClick }: { member: TeamMember; index: numbe
                 whileTap={{ scale: 0.95 }}
                 aria-label={`${member.name}'s ${platform}`}
               >
-                <IconComponent size={16} />
+                <IconComponent size={14} className="md:w-4 md:h-4" />
               </motion.a>
             )
           })}
@@ -461,7 +461,7 @@ export default function TeamSection() {
     <>
     <motion.section 
       id="team" 
-      className="py-20 bg-transparent relative overflow-hidden" 
+      className="py-12 md:py-20 bg-transparent relative overflow-hidden" 
       ref={ref}
       initial="hidden"
       whileInView="visible"
@@ -498,14 +498,14 @@ export default function TeamSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
         >
           <motion.h2 
-            className="text-5xl md:text-6xl font-bold mb-8 tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 tracking-tight px-4"
             variants={textReveal}
           >
             <span className="text-gray-100">Meet Our </span>
@@ -521,7 +521,7 @@ export default function TeamSection() {
           </motion.h2>
           
           <motion.p
-            className="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed font-light"
+            className="text-base md:text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed font-light px-4"
             variants={fadeUpDelayed}
           >
             Passionate leaders driving innovation and building the future of tech. 
@@ -530,7 +530,7 @@ export default function TeamSection() {
         </motion.div>
 
         {/* Office Bearers Section */}
-        <div className="-mx-4 sm:-mx-6 lg:-mx-8">
+        <div className="w-full overflow-hidden">
           <KineticTeamHybrid members={kineticMembers} title="Leadership" subtitle="Office Bearers '24" />
         </div>
 
@@ -579,14 +579,14 @@ export default function TeamSection() {
 
         {/* Join Team CTA */}
         <motion.div
-          className="text-center mt-16"
+          className="text-center mt-12 md:mt-16"
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
           variants={fadeUpDelayed}
         >
           <motion.button
-            className="px-10 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl text-white font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+            className="px-8 py-3 md:px-10 md:py-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl text-white font-semibold text-base md:text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all"
             whileHover={{ 
               ...hoverLift,
               boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)"
