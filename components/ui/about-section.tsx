@@ -62,7 +62,7 @@ export default function AboutSection3() {
       <div className="max-w-6xl mx-auto w-full">
         <div className="relative">
           {/* Header with social icons */}
-          <div className="flex justify-between items-center mb-8 w-[85%] absolute lg:top-4 md:top-0 sm:-top-2 -top-3 z-10">
+          <div className="flex justify-between items-center mb-8 w-full lg:w-[85%] relative lg:absolute lg:top-4 md:top-0 sm:-top-2 -top-3 z-10">
             <div className="flex items-center gap-2 text-xl">
               <span className="text-blue-500 animate-spin">✱</span>
               <TimelineContent
@@ -70,12 +70,12 @@ export default function AboutSection3() {
                 animationNum={0}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="text-3xl font-bold text-white tracking-wide"
+                className="text-2xl sm:text-3xl font-bold text-white tracking-wide"
               >
                 ABOUT ACM
               </TimelineContent>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-2 sm:gap-4">
               <TimelineContent
                 as="a"
                 animationNum={0}
@@ -132,13 +132,14 @@ export default function AboutSection3() {
             animationNum={4}
             timelineRef={heroRef}
             customVariants={scaleVariants}
-            className="relative group"
+            className="relative group w-full max-w-full overflow-hidden"
           >
             <svg
-              className="w-full"
+              className="w-full h-auto"
               width={"100%"}
               height={"100%"}
               viewBox="0 0 100 40"
+              preserveAspectRatio="xMidYMid meet"
             >
               <defs>
                 <clipPath
@@ -206,9 +207,9 @@ export default function AboutSection3() {
           </div>
         </div>
         {/* Main Content */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           <div className="md:col-span-2">
-            <h1 className="sm:text-4xl md:text-5xl text-2xl !leading-[110%] font-semibold text-gray-100 mb-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl !leading-[110%] font-semibold text-gray-100 mb-6 sm:mb-8">
               <VerticalCutReveal
                 splitBy="words"
                 staggerDuration={0.05}
@@ -230,7 +231,7 @@ export default function AboutSection3() {
               animationNum={9}
               timelineRef={heroRef}
               customVariants={revealVariants}
-              className="grid md:grid-cols-2 gap-8 text-gray-400"
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-gray-400"
             >
               <TimelineContent
                 as="div"
@@ -268,7 +269,7 @@ export default function AboutSection3() {
                 animationNum={12}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="text-blue-500 text-2xl font-bold mb-2"
+                className="text-blue-500 text-xl sm:text-2xl font-bold mb-2"
               >
                 ACM CHAPTER
               </TimelineContent>
@@ -288,7 +289,7 @@ export default function AboutSection3() {
                 timelineRef={heroRef}
                 customVariants={revealVariants}
                 href="/who-we-are"
-                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 flex w-fit ml-auto gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg cursor-pointer font-semibold"
+                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 flex w-full sm:w-fit ml-auto gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-4 sm:px-5 py-3 rounded-lg cursor-pointer font-semibold text-sm sm:text-base"
               >
                 WHO WE ARE <ArrowRight className="" />
               </TimelineContent>

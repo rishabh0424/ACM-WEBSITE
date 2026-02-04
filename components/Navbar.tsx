@@ -42,13 +42,13 @@ export default function Navbar() {
       transition={{ duration: 0.8, delay: 0.2 }}
     >
       <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo - Left Corner */}
           <motion.a
             href="/"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="relative w-32 h-32">
+            <div className="relative w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32">
               <img
                 src="/photos/logo.png"
                 alt="ACM Logo"
@@ -58,7 +58,7 @@ export default function Navbar() {
           </motion.a>
 
           {/* Desktop Navigation - Right Corner */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
             {navItems.map((item, index) => (
               item.dropdown ? (
                 <div key={item.name} className="relative group">
