@@ -33,6 +33,12 @@ export default function HomePage() {
       setShowLightning(false)
       setShowIntro(true)
     }, 8000)
+    
+    const skipHandler = () => {
+      setShowLightning(false)
+      setShowIntro(true)
+    }
+    
     return () => clearTimeout(timer)
   }, [])
 
