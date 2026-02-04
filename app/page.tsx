@@ -19,7 +19,7 @@ import Footer from '@/components/Footer'
 export default function HomePage() {
   const [showLightning, setShowLightning] = useState(false)
   const [showIntro, setShowIntro] = useState(false)
-  const [introComplete, setIntroComplete] = useState(true)
+  const [introComplete, setIntroComplete] = useState(false)
 
   useEffect(() => {
     const hasSeenIntro = localStorage.getItem('acm-intro-seen')
