@@ -100,15 +100,15 @@ const JoinSection = () => {
                   animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : { opacity: 0, y: 30, rotateX: -20 }}
                   transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
                   whileHover={{ y: -10, scale: 1.05 }}
-                  className="group relative"
+                  className="group relative overflow-hidden"
                   style={{ perspective: 1000 }}
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300 rounded-2xl`} />
-                  <div className="relative p-4 sm:p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-500/50 transition-all duration-300 h-full">
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <div className="relative p-4 sm:p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col items-center justify-center">
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
                       <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
                     </div>
-                    <p className="text-gray-300 text-sm sm:text-base md:text-lg font-medium">{feature.text}</p>
+                    <p className="text-gray-300 text-sm sm:text-base md:text-lg font-medium text-center break-words">{feature.text}</p>
                   </div>
                 </motion.div>
               ))}

@@ -76,8 +76,8 @@ export function Component() {
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6">
-        <div className="text-center max-w-5xl w-full">
+      <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6 py-20">
+        <div className="text-center max-w-5xl w-full overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div key={`content-${currentSlide}`}>
               <motion.h1 
@@ -104,10 +104,12 @@ export function Component() {
                   ease: [0.76, 0, 0.24, 1],
                   delay: 0.5
                 }}
-                className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-black text-white mb-6 sm:mb-8 leading-tight sm:leading-none"
+                className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-black text-white mb-6 sm:mb-8 leading-tight break-words"
                 style={{ 
                   textShadow: "0 0 30px rgba(59,130,246,0.5)",
-                  transformStyle: "preserve-3d"
+                  transformStyle: "preserve-3d",
+                  wordBreak: "break-word",
+                  overflowWrap: "break-word"
                 }}
               >
                 <motion.span
@@ -142,8 +144,12 @@ export function Component() {
                   ease: "backOut",
                   delay: 0.8
                 }}
-                className="text-base sm:text-lg md:text-2xl lg:text-3xl text-gray-200 font-light max-w-4xl mx-auto px-4"
-                style={{ transformStyle: "preserve-3d" }}
+                className="text-base sm:text-lg md:text-2xl lg:text-3xl text-gray-200 font-light max-w-4xl mx-auto px-4 break-words"
+                style={{ 
+                  transformStyle: "preserve-3d",
+                  wordBreak: "break-word",
+                  overflowWrap: "break-word"
+                }}
               >
                 {slides[currentSlide].description}
               </motion.p>
