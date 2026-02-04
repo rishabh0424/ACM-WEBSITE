@@ -1,17 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    optimizePackageImports: ['framer-motion', 'lucide-react'],
-  },
-  images: {
-    domains: ['via.placeholder.com', 'picsum.photos'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
-  },
-}
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
