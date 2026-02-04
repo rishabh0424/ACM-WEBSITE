@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useRef } from 'react'
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react'
+import { Github, Linkedin, Twitter, Mail, Crown } from 'lucide-react'
 import Image from 'next/image'
 import { 
   fadeUp, 
@@ -16,6 +16,21 @@ import {
   viewportConfig 
 } from '@/lib/animations'
 import { TeamOdyssey } from '@/components/ui/team-odyssey'
+import KineticTeamHybrid from '@/components/ui/kinetic-team-hybrid'
+
+interface OfficeMember {
+  id: string
+  name: string
+  position: string
+  image: string
+  bio?: string
+  social: {
+    linkedin?: string
+    github?: string
+    twitter?: string
+    email?: string
+  }
+}
 
 interface TeamMember {
   id: string
@@ -43,6 +58,81 @@ interface TeamMember {
     email?: string
   }
 }
+
+const officeMembers: OfficeMember[] = [
+  {
+    id: '01',
+    name: 'Rajyavardhan',
+    position: 'President',
+    image: '/office-bearers/RAJYAVARDHAN.png',
+    bio: 'Leading ACM chapter with vision and innovation',
+    social: {
+      linkedin: 'https://linkedin.com/in/rajyavardhan',
+      github: 'https://github.com/rajyavardhan',
+      email: 'president@acm.org'
+    }
+  },
+  {
+    id: '02',
+    name: 'Tamanna Arora',
+    position: 'Vice President',
+    image: '/office-bearers/TAMANNA.png',
+    bio: 'Supporting leadership and strategic initiatives',
+    social: {
+      linkedin: 'https://linkedin.com/in/tamannaarora',
+      twitter: 'https://twitter.com/tamannaarora',
+      email: 'vicepresident@acm.org'
+    }
+  },
+  {
+    id: '03',
+    name: 'Ayush Swamy',
+    position: 'Secretary',
+    image: '/office-bearers/AYUSH.png',
+    bio: 'Managing operations and communications',
+    social: {
+      linkedin: 'https://linkedin.com/in/ayushswamy',
+      github: 'https://github.com/ayushswamy',
+      email: 'secretary@acm.org'
+    }
+  },
+  {
+    id: '04',
+    name: 'Bhakti',
+    position: 'Treasurer',
+    image: '/office-bearers/BHAKTI.png',
+    bio: 'Overseeing financial planning and resources',
+    social: {
+      linkedin: 'https://linkedin.com/in/bhakti',
+      email: 'treasurer@acm.org'
+    }
+  },
+  {
+    id: '05',
+    name: 'Aditya Agrawal',
+    position: 'Webmaster',
+    image: '/office-bearers/ADITYA.png',
+    bio: 'Managing digital presence and technology',
+    social: {
+      linkedin: 'https://linkedin.com/in/adityaagrawal',
+      github: 'https://github.com/adityaagrawal',
+      twitter: 'https://twitter.com/adityaagrawal',
+      email: 'webmaster@acm.org'
+    }
+  }
+]
+
+const kineticMembers = officeMembers.map(m => ({
+  id: m.id,
+  name: m.name,
+  role: m.position,
+  image: m.image,
+  instagram: m.id === '01' ? 'https://www.instagram.com/_rajyavardhan_rathore_/' :
+             m.id === '02' ? 'https://www.instagram.com/tamanna_arora54' :
+             m.id === '03' ? 'https://www.instagram.com/ayush_swamy' :
+             m.id === '04' ? 'https://www.instagram.com/bhakttiix' :
+             m.id === '05' ? 'https://www.instagram.com/__.aditya_agrawal' : undefined
+}))
 
 const teamMembers: TeamMember[] = [
   {
@@ -408,7 +498,7 @@ export default function TeamSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-20"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -437,6 +527,41 @@ export default function TeamSection() {
             Passionate leaders driving innovation and building the future of tech. 
             Meet the visionaries behind our thriving ACM community.
           </motion.p>
+        </motion.div>
+
+        {/* Office Bearers Section */}
+        <div className="-mx-4 sm:-mx-6 lg:-mx-8">
+          <KineticTeamHybrid members={kineticMembers} title="Leadership" subtitle="Office Bearers '24" />
+        </div>
+
+        {/* Divider */}
+        <motion.div
+          className="relative h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent mb-16 md:mb-20"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <motion.div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-blue-400 rounded-full"
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.5, 1, 0.5],
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+        </motion.div>
+
+        {/* Team Section Header */}
+        <motion.div
+          className="text-center mb-8 md:mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeUp}
+        >
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3">Core Team</h3>
+          <p className="text-sm md:text-base text-gray-400">Dedicated teams working across different domains</p>
         </motion.div>
 
         {/* Team Grid */}

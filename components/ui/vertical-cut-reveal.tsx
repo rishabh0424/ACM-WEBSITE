@@ -65,6 +65,11 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
     const containerRef = useRef<HTMLSpanElement>(null)
     const text = typeof children === "string" ? children : children?.toString() || ""
     const [isAnimating, setIsAnimating] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    setIsMobile(typeof window !== 'undefined' && window.innerWidth < 768)
+  }, [])
 
     const splitIntoCharacters = (text: string): string[] => {
       if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
@@ -138,7 +143,11 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
       hidden: { y: reverse ? "-100%" : "100%" },
       visible: (i: number) => ({
         y: 0,
-        transition: {
+        transition: isMobile ? {
+          type: "tween",
+          duration: 0.3,
+          delay: ((transition?.delay as number) || 0) + getStaggerDelay(i),
+        } : {
           ...transition,
           delay: ((transition?.delay as number) || 0) + getStaggerDelay(i),
         },
