@@ -50,6 +50,8 @@ function FlipCard({ src, index, target }: FlipCardProps) {
                     src={src}
                     alt={`hero-${index}`}
                     className="h-full w-full object-cover"
+                    loading="eager"
+                    decoding="async"
                 />
                 <div className="absolute inset-0 bg-black/20 hover:bg-black/10 transition-colors" />
             </motion.div>
@@ -135,17 +137,18 @@ export default function IntroAnimation() {
     }, []);
 
     return (
-        <div ref={containerRef} className="relative w-full h-full bg-transparent overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black via-black/50 to-transparent pointer-events-none z-20" />
-            <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden px-4">
+        <div ref={containerRef} className="relative w-full h-full bg-transparent overflow-hidden -mt-1">
+            <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none z-20" />
+            <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden px-4 py-8">
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={phase === "circle" ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
                     transition={{ duration: 2, ease: "easeInOut" }}
-                    className="absolute z-10 flex flex-col items-center justify-center text-center pointer-events-none top-1/2 -translate-y-1/2"
+                    className="absolute z-10 flex flex-col items-center justify-center text-center pointer-events-none top-1/2 -translate-y-1/2 px-4"
                 >
-                    <h1 className="text-2xl font-medium tracking-tight text-white md:text-4xl">
+                    <h1 className="text-3xl font-medium tracking-tight text-white md:text-4xl">
                         Why Choose ACM?
                     </h1>
                     <p className="mt-4 text-xs font-bold tracking-[0.2em] text-gray-400">
@@ -157,14 +160,13 @@ export default function IntroAnimation() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={phase === "arc" ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 2, ease: "easeInOut" }}
-                    className="absolute top-[10%] z-10 flex flex-col items-center justify-center text-center pointer-events-none px-4"
+                    className="absolute top-[15%] md:top-[10%] z-10 flex flex-col items-center justify-center text-center pointer-events-none px-6"
                 >
-                    <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-tight mb-4">
+                    <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-tight mb-3">
                         Join Our Community
                     </h2>
                     <p className="text-sm md:text-base text-gray-400 max-w-lg leading-relaxed">
-                        Experience hands-on learning, networking, and cutting-edge projects <br className="hidden md:block" />
-                        with passionate developers and tech enthusiasts.
+                        Experience hands-on learning, networking, and cutting-edge projects with passionate developers and tech enthusiasts.
                     </p>
                 </motion.div>
 
@@ -176,30 +178,30 @@ export default function IntroAnimation() {
                             target = scatterPositions[i];
                         } else if (phase === "line") {
                             const isMobile = containerSize.width < 768;
-                            const lineSpacing = isMobile ? 90 : 70;
+                            const lineSpacing = isMobile ? 95 : 70;
                             const lineTotalWidth = TOTAL_IMAGES * lineSpacing;
                             const lineX = i * lineSpacing - lineTotalWidth / 2;
-                            target = { x: lineX, y: 0, rotation: 0, scale: isMobile ? 1.2 : 1, opacity: 1 };
+                            target = { x: lineX, y: 0, rotation: 0, scale: isMobile ? 1.3 : 1, opacity: 1 };
                         } else if (phase === "circle") {
                             const isMobile = containerSize.width < 768;
                             const minDimension = Math.min(containerSize.width, containerSize.height);
-                            const circleRadius = isMobile ? Math.min(minDimension * 0.3, 200) : Math.min(minDimension * 0.35, 350);
+                            const circleRadius = isMobile ? Math.min(minDimension * 0.32, 220) : Math.min(minDimension * 0.35, 350);
                             const circleAngle = (i / TOTAL_IMAGES) * 360;
                             const circleRad = (circleAngle * Math.PI) / 180;
                             target = {
                                 x: Math.cos(circleRad) * circleRadius,
                                 y: Math.sin(circleRad) * circleRadius,
                                 rotation: circleAngle + 90,
-                                scale: isMobile ? 1.1 : 1,
+                                scale: isMobile ? 1.15 : 1,
                                 opacity: 1,
                             };
                         } else if (phase === "arc") {
                             const isMobile = containerSize.width < 768;
                             const baseRadius = Math.min(containerSize.width * 0.9, containerSize.height * 1.2);
-                            const arcRadius = baseRadius * (isMobile ? 1.2 : 1.1);
-                            const arcApexY = containerSize.height * (isMobile ? 0.4 : 0.25);
+                            const arcRadius = baseRadius * (isMobile ? 0.95 : 1.1);
+                            const arcApexY = containerSize.height * (isMobile ? 0.38 : 0.25);
                             const arcCenterY = arcApexY + arcRadius;
-                            const spreadAngle = isMobile ? 90 : 130;
+                            const spreadAngle = isMobile ? 75 : 130;
                             const startAngle = -90 - (spreadAngle / 2);
                             const step = spreadAngle / (TOTAL_IMAGES - 1);
                             const currentArcAngle = startAngle + (i * step);
@@ -209,7 +211,7 @@ export default function IntroAnimation() {
                                 x: Math.cos(arcRad) * arcRadius,
                                 y: Math.sin(arcRad) * arcRadius + arcCenterY,
                                 rotation: currentArcAngle + 90,
-                                scale: isMobile ? 1.3 : 1.8,
+                                scale: isMobile ? 1.15 : 1.8,
                                 opacity: 1,
                             };
                         }

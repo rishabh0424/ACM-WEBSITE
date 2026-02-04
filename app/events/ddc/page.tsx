@@ -2,8 +2,9 @@
 
 import { useRouter } from 'next/navigation'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowLeft, Calendar, MapPin, Users } from 'lucide-react'
+import { ArrowLeft, Calendar, MapPin, Users, Trophy } from 'lucide-react'
 import { useRef } from 'react'
+import { ElectricCard } from '@/components/ui/electric-card'
 
 export default function DDCPage() {
   const router = useRouter()
@@ -22,21 +23,36 @@ export default function DDCPage() {
       title: 'DDC 2024: AI Revolution',
       image: '/photos/60462c4f-82bb-4ed1-8efa-524485c96a7f.jpg',
       participants: 500,
-      projects: 120
+      projects: 120,
+      winners: [
+        { place: '1st', team: 'Team Alpha', project: 'AI-powered healthcare solution revolutionizing patient care.' },
+        { place: '2nd', team: 'Team Beta', project: 'Blockchain supply chain management ensuring transparency.' },
+        { place: '3rd', team: 'Team Gamma', project: 'Smart city IoT platform for sustainable living.' }
+      ]
     },
     {
       year: '2023',
       title: 'DDC 2023: Web3 Future',
       image: '/photos/683accf2-2b49-427b-95a8-d56ccfb1a276.jpg',
       participants: 450,
-      projects: 100
+      projects: 100,
+      winners: [
+        { place: '1st', team: 'Team Delta', project: 'Decentralized social media platform with privacy focus.' },
+        { place: '2nd', team: 'Team Epsilon', project: 'NFT marketplace for digital artists and creators.' },
+        { place: '3rd', team: 'Team Zeta', project: 'Web3 gaming platform with play-to-earn mechanics.' }
+      ]
     },
     {
       year: '2022',
       title: 'DDC 2022: Cloud Native',
       image: '/photos/6b525cdc-95f9-444d-a91e-e4c61b1c3710.jpg',
       participants: 400,
-      projects: 85
+      projects: 85,
+      winners: [
+        { place: '1st', team: 'Team Eta', project: 'Serverless microservices architecture for e-commerce.' },
+        { place: '2nd', team: 'Team Theta', project: 'Container orchestration platform for DevOps teams.' },
+        { place: '3rd', team: 'Team Iota', project: 'Cloud-native monitoring and analytics dashboard.' }
+      ]
     }
   ]
 
@@ -239,6 +255,84 @@ export default function DDCPage() {
                   </motion.div>
                 </div>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Winners Section */}
+      <section className="relative py-32 px-6 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-dark-base via-cyan-950/20 to-yellow-950/20" />
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-full h-full opacity-20">
+            <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500/30 rounded-full blur-[120px] animate-pulse" />
+            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-yellow-500/30 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-orange-500/20 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '2s' }} />
+          </div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(34,211,238,0.05),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(34,211,238,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        </div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-20"
+          >
+            <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-yellow-500/20 border border-yellow-500/30 text-yellow-400 text-sm font-semibold tracking-wider uppercase backdrop-blur-sm mb-6">
+              <Trophy className="w-4 h-4" />
+              Champions
+            </div>
+            <h2 className="text-4xl md:text-6xl font-display font-bold px-4">
+              <span className="gradient-text">DDC Winners</span>
+            </h2>
+          </motion.div>
+
+          <div className="space-y-32">
+            {pastEvents.map((event, eventIndex) => (
+              <div key={event.year}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="text-center mb-12"
+                >
+                  <div className="inline-block px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-bold mb-4">
+                    {event.year}
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white px-4">
+                    {event.title}
+                  </h3>
+                </motion.div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
+                  {event.winners.map((winner, index) => {
+                    const colors = ['#FFD700', '#C0C0C0', '#CD7F32'];
+                    const variants = ['swirl', 'hue', 'swirl'] as const;
+                    return (
+                      <motion.div
+                        key={winner.team}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.2 + index * 0.2 }}
+                      >
+                        <ElectricCard
+                          variant={variants[index]}
+                          color={colors[index]}
+                          badge={winner.place + ' Place'}
+                          title={winner.team}
+                          description={winner.project}
+                          width="18rem"
+                          aspectRatio="3 / 4"
+                        />
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
             ))}
           </div>
         </div>

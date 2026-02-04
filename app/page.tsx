@@ -19,33 +19,31 @@ import Footer from '@/components/Footer'
 export default function HomePage() {
   const [showLightning, setShowLightning] = useState(false)
   const [showIntro, setShowIntro] = useState(false)
-  const [introComplete, setIntroComplete] = useState(false)
+  const [introComplete, setIntroComplete] = useState(true)
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+    
     const hasSeenIntro = localStorage.getItem('acm-intro-seen')
     if (hasSeenIntro) {
-      setIntroComplete(true)
       return
     }
     
+    setIntroComplete(false)
     setShowLightning(true)
     const timer = setTimeout(() => {
       setShowLightning(false)
       setShowIntro(true)
     }, 8000)
-    
-    const skipHandler = () => {
-      setShowLightning(false)
-      setShowIntro(true)
-    }
-    
     return () => clearTimeout(timer)
   }, [])
 
   const handleIntroComplete = () => {
     setShowIntro(false)
     setIntroComplete(true)
-    localStorage.setItem('acm-intro-seen', 'true')
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('acm-intro-seen', 'true')
+    }
   }
 
   return (

@@ -52,13 +52,14 @@ export default function AboutSection3() {
   };
   return (
     <motion.section 
-      className="min-h-screen bg-transparent text-gray-100 py-8 px-4 flex items-center" 
+      className="min-h-screen bg-transparent text-gray-100 py-8 px-4 flex items-center -mb-1 relative" 
       ref={heroRef}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
     >
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-black pointer-events-none z-20" />
       <div className="max-w-6xl mx-auto w-full">
         <div className="relative">
           {/* Header with social icons */}
@@ -157,7 +158,7 @@ export default function AboutSection3() {
                 preserveAspectRatio="xMidYMid slice"
                 width={"100%"}
                 height={"100%"}
-                xlinkHref="/photos/DSC_0163.JPG"
+                href="/photos/DSC_0163.JPG"
               ></image>
             </svg>
           </TimelineContent>

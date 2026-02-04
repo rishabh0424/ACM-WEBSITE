@@ -168,8 +168,11 @@ export function ParticleTextEffect({ words = ["HELLO", "WELCOME TO", "ACM BU", "
     offscreenCanvas.height = canvas.height
     const offscreenCtx = offscreenCanvas.getContext("2d")!
 
+    const isMobile = canvas.width < 768
+    const fontSize = isMobile ? Math.min(canvas.width * 0.12, 60) : 100
+    
     offscreenCtx.fillStyle = "white"
-    offscreenCtx.font = "bold 100px Arial"
+    offscreenCtx.font = `bold ${fontSize}px Arial`
     offscreenCtx.textAlign = "center"
     offscreenCtx.textBaseline = "middle"
     offscreenCtx.fillText(word, canvas.width / 2, canvas.height / 2)

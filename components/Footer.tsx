@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Twitter, Instagram, Mail, MapPin, Hexagon } from 'lucide-react'
+import { Github, Linkedin, Twitter, Instagram, Mail, MapPin, Hexagon, MessageSquare } from 'lucide-react'
+import { SocialCard } from '@/components/ui/social-card'
 import { 
   staggerContainer, 
   cardVariant, 
@@ -75,7 +76,8 @@ const Footer = () => {
     { name: 'Workshops', href: '#workshops' },
     { name: 'Projects', href: '#projects' },
     { name: 'Gallery', href: '#gallery' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Contact', href: '#contact' },
+    { name: 'Give Feedback', href: '#feedback' }
   ]
 
   const socialLinks = [
@@ -115,7 +117,7 @@ const Footer = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Main Footer Content */}
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -147,33 +149,19 @@ const Footer = () => {
               collaboration, and excellence in technology education.
             </motion.p>
 
-            {/* Social Icons */}
-            <motion.div 
-              className="flex space-x-4"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportConfig}
+            {/* Give Feedback Button */}
+            <motion.div
+              variants={linkVariants}
             >
-              {socialLinks.map((social) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-transparent/50 border border-gray-700/50 flex items-center justify-center text-gray-400 hover:text-blue-400 hover:border-blue-500/40 hover:bg-blue-500/10 transition-all duration-300"
-                  variants={socialVariants}
-                  whileHover={{ 
-                    scale: 1.1, 
-                    y: -3,
-                    boxShadow: "0 10px 25px rgba(0, 212, 255, 0.3)"
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label={social.label}
-                >
-                  <social.icon size={18} />
-                </motion.a>
-              ))}
+              <motion.a
+                href="/feedback"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-blue-500/30 rounded-lg text-blue-400 font-semibold hover:bg-blue-500/10 hover:border-blue-500/50 transition-all duration-300"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <MessageSquare size={18} />
+                Give Feedback
+              </motion.a>
             </motion.div>
           </motion.div>
 
@@ -212,7 +200,7 @@ const Footer = () => {
               whileInView="visible"
               viewport={viewportConfig}
             >
-              {resources.map((link) => (
+              {resources.filter(link => link.name !== 'Give Feedback').map((link) => (
                 <motion.li key={link.name} variants={linkVariants}>
                   <motion.a
                     href={link.href}
@@ -225,6 +213,18 @@ const Footer = () => {
                 </motion.li>
               ))}
             </motion.ul>
+          </motion.div>
+
+          {/* Social Card */}
+          <motion.div variants={cardVariant} className="flex justify-center md:justify-end">
+            <SocialCard 
+              title="Connect Us On"
+              socialLinks={[
+                { href: 'https://www.instagram.com/acm_bu/', icon: <Instagram className="w-6 h-6" />, className: 'box1' },
+                { href: 'https://twitter.com/acm_chapter', icon: <Twitter className="w-6 h-6" />, className: 'box2', delay: '0.2s' },
+                { href: 'https://github.com/acm-chapter', icon: <Github className="w-6 h-6" />, className: 'box3', delay: '0.4s' },
+              ]}
+            />
           </motion.div>
         </motion.div>
 
