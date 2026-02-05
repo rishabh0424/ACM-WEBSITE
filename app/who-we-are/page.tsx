@@ -15,16 +15,24 @@ export default function WhoWeArePage() {
     offset: ["start start", "end end"],
   });
 
+  const images = [
+    "/photos/20762853-f930-46f7-84d0-2f23c6e4f373.jpg",
+    "/photos/5a075dd4-e8f4-4734-b1f8-b0b1709b2aeb.jpg",
+    "/photos/60462c4f-82bb-4ed1-8efa-524485c96a7f.jpg",
+    "/photos/683accf2-2b49-427b-95a8-d56ccfb1a276.jpg",
+    "/photos/6b525cdc-95f9-444d-a91e-e4c61b1c3710.jpg",
+  ];
+
   const [currentImage, setCurrentImage] = useState(0);
 
   // Auto-swipe effect
   useEffect(() => {
     const autoSwipe = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 3000); // Change image every 3 seconds
+    }, 3000);
 
     return () => clearInterval(autoSwipe);
-  }, []);
+  }, [images.length]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -40,14 +48,6 @@ export default function WhoWeArePage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [images.length]);
 
-  const images = [
-    "/photos/20762853-f930-46f7-84d0-2f23c6e4f373.jpg",
-    "/photos/5a075dd4-e8f4-4734-b1f8-b0b1709b2aeb.jpg",
-    "/photos/60462c4f-82bb-4ed1-8efa-524485c96a7f.jpg",
-    "/photos/683accf2-2b49-427b-95a8-d56ccfb1a276.jpg",
-    "/photos/6b525cdc-95f9-444d-a91e-e4c61b1c3710.jpg",
-  ];
-
   const values = [
     { icon: Users, title: "Community First", desc: "Building connections that last" },
     { icon: Target, title: "Innovation", desc: "Pushing boundaries in tech" },
@@ -55,6 +55,7 @@ export default function WhoWeArePage() {
     { icon: Award, title: "Excellence", desc: "Striving for the best" },
   ];
 
+  // ... rest of your component
   return (
     <div ref={containerRef} className="bg-dark-base min-h-screen relative">
       {/* Animated Background */}
@@ -71,6 +72,7 @@ export default function WhoWeArePage() {
           style={{
             backgroundImage: "linear-gradient(135deg, #0a0e1a 0%, #1a2332 100%)",
           }}
+      
         />
         
         <motion.div
