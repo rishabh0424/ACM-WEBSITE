@@ -78,7 +78,7 @@ class Particle {
 
     if (drawAsPoints) {
       ctx.fillStyle = `rgb(${currentColor.r}, ${currentColor.g}, ${currentColor.b})`
-      ctx.fillRect(this.pos.x, this.pos.y, 2, 2)
+      ctx.fillRect(this.pos.x - 0.5, this.pos.y - 0.5, 4, 4)
     } else {
       ctx.fillStyle = `rgb(${currentColor.r}, ${currentColor.g}, ${currentColor.b})`
       ctx.beginPath()
@@ -131,15 +131,16 @@ interface ParticleTextEffectProps {
   words?: string[]
 }
 
-export function ParticleTextEffect({ words = ["HELLO", "WELCOME TO", "ACM BU", "INNOVATE", "CREATE"] }: ParticleTextEffectProps) {
+export function ParticleTextEffect({ words = ["WELCOME TO", "ACM FAMILY", "INNOVATE", "CREATE", "INSPIRE"] }: ParticleTextEffectProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef<number>()
   const particlesRef = useRef<Particle[]>([])
   const frameCountRef = useRef(0)
   const wordIndexRef = useRef(0)
 
-  const pixelSteps = 6
+  const pixelSteps = 2
   const drawAsPoints = true
+  const wordDisplayDuration = 240 // 4 seconds at 60fps
 
   const generateRandomPos = (x: number, y: number, mag: number): Vector2D => {
     const randomX = Math.random() * 1000
@@ -169,7 +170,7 @@ export function ParticleTextEffect({ words = ["HELLO", "WELCOME TO", "ACM BU", "
     const offscreenCtx = offscreenCanvas.getContext("2d")!
 
     const isMobile = canvas.width < 768
-    const fontSize = isMobile ? Math.min(canvas.width * 0.12, 60) : 100
+    const fontSize = isMobile ? Math.min(canvas.width * 0.15, 70) : 120
     
     offscreenCtx.fillStyle = "white"
     offscreenCtx.font = `bold ${fontSize}px Arial`
@@ -181,9 +182,9 @@ export function ParticleTextEffect({ words = ["HELLO", "WELCOME TO", "ACM BU", "
     const pixels = imageData.data
 
     const newColor = {
-      r: 200 + Math.random() * 55,
-      g: 200 + Math.random() * 55,
-      b: 200 + Math.random() * 55,
+      r: 220 + Math.random() * 35,
+      g: 220 + Math.random() * 35,
+      b: 220 + Math.random() * 35,
     }
 
     const particles = particlesRef.current
@@ -220,10 +221,10 @@ export function ParticleTextEffect({ words = ["HELLO", "WELCOME TO", "ACM BU", "
           particle.pos.x = randomPos.x
           particle.pos.y = randomPos.y
 
-          particle.maxSpeed = Math.random() * 6 + 4
-          particle.maxForce = particle.maxSpeed * 0.05
-          particle.particleSize = Math.random() * 6 + 6
-          particle.colorBlendRate = Math.random() * 0.0275 + 0.0025
+          particle.maxSpeed = Math.random() * 5 + 6
+          particle.maxForce = particle.maxSpeed * 0.09
+          particle.particleSize = Math.random() * 4 + 5
+          particle.colorBlendRate = Math.random() * 0.02 + 0.01
 
           particles.push(particle)
         }
@@ -253,7 +254,7 @@ export function ParticleTextEffect({ words = ["HELLO", "WELCOME TO", "ACM BU", "
     const ctx = canvas.getContext("2d")!
     const particles = particlesRef.current
 
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)"
+    ctx.fillStyle = "rgba(0, 0, 0, 0.08)"
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     for (let i = particles.length - 1; i >= 0; i--) {
@@ -274,7 +275,7 @@ export function ParticleTextEffect({ words = ["HELLO", "WELCOME TO", "ACM BU", "
     }
 
     frameCountRef.current++
-    if (frameCountRef.current % 360 === 0) {
+    if (frameCountRef.current % wordDisplayDuration === 0) {
       wordIndexRef.current = (wordIndexRef.current + 1) % words.length
       nextWord(words[wordIndexRef.current], canvas)
     }

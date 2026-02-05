@@ -4,6 +4,13 @@ import Image from "next/image";
 
 const NeonQrButton = () => {
   const [hovered, setHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setClicked(!clicked);
+  };
 
   return (
     <div
@@ -13,6 +20,7 @@ const NeonQrButton = () => {
     >
       {/* Soft pastel circular button */}
       <button
+        onClick={handleClick}
         aria-label="Show QR code"
         className="
           relative rounded-full w-12 h-12
@@ -34,7 +42,7 @@ const NeonQrButton = () => {
       {/* Light pastel popover card */}
       <div
         className={`
-          absolute left-1/2 top-full mt-3
+          absolute left-1/2 bottom-full mb-3
           w-52 h-52
           -translate-x-1/2
           rounded-2xl
@@ -43,9 +51,9 @@ const NeonQrButton = () => {
           border border-indigo-200
           shadow-[0_0_25px_5px_rgba(129,140,248,0.4)]
           flex items-center justify-center
-          transform origin-top
+          transform origin-bottom
           transition-all duration-300 ease-in-out
-          ${hovered ? "opacity-100 scale-100 visible" : "opacity-0 scale-75 invisible pointer-events-none"}
+          ${(hovered || clicked) ? "opacity-100 scale-100 visible" : "opacity-0 scale-75 invisible pointer-events-none"}
         `}
       >
         <div className="bg-white bg-opacity-80 rounded-xl p-4 flex items-center justify-center">

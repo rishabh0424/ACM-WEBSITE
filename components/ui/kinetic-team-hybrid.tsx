@@ -196,9 +196,16 @@ function TeamRow({
             {data.role}
           </span>
           
-          <div className="toggle-icon block md:hidden text-yellow-500" onClick={(e) => e.stopPropagation()}>
-            {isActive ? <Minus size={16} /> : <Plus size={16} />}
-          </div>
+          <button 
+            className="toggle-icon block md:hidden text-yellow-500 p-2 hover:text-yellow-400 transition-colors" 
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveId(isActive ? null : data.id);
+            }}
+            aria-label={isActive ? "Collapse" : "Expand"}
+          >
+            {isActive ? <Minus size={20} /> : <Plus size={20} />}
+          </button>
 
           <motion.div
              animate={{ x: isActive ? 0 : -10, opacity: isActive ? 1 : 0 }}
