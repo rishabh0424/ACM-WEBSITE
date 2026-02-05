@@ -27,7 +27,7 @@ interface KineticTeamHybridProps {
 
 /* ---------- Main Component ---------- */
 
-export default function KineticTeamHybrid({ members, title = "Leadership", subtitle = "Office Bearers '24" }: KineticTeamHybridProps) {
+export default function KineticTeamHybrid({ members, title = "Leadership", subtitle = "Office Bearers '26" }: KineticTeamHybridProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);

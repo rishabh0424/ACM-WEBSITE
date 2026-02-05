@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Linkedin } from "lucide-react";
 
 interface SocialBoxProps {
@@ -8,6 +8,8 @@ interface SocialBoxProps {
   icon: React.ReactNode;
   className: string;
   delay?: string;
+  showSocial: boolean;
+  isMobile: boolean;
 }
 
 interface SocialCardProps {
@@ -38,13 +40,21 @@ const DiscordIcon = () => (
   </svg>
 );
 
-const SocialBox = ({ href, icon, className, delay }: SocialBoxProps) => (
-  <a href={href}>
-    <div className={`box ${className}`} style={{ transitionDelay: delay }}>
-      <span className="icon">{icon}</span>
-    </div>
-  </a>
-);
+const SocialBox = ({ href, icon, className, delay, showSocial, isMobile }: SocialBoxProps) => {
+  const handleClick = (e: React.MouseEvent) => {
+    if (isMobile && !showSocial) {
+      e.preventDefault();
+    }
+  };
+
+  return (
+    <a href={href} onClick={handleClick}>
+      <div className={`box ${className}`} style={{ transitionDelay: delay }}>
+        <span className="icon">{icon}</span>
+      </div>
+    </a>
+  );
+};
 
 const SocialCard = ({
   title = "Socials",
@@ -53,26 +63,51 @@ const SocialCard = ({
     { href: "##", icon: <TwitterIcon />, className: "box2", delay: "0.2s" },
     { href: "###", icon: <DiscordIcon />, className: "box3", delay: "0.4s" },
   ],
-}: SocialCardProps) => (
-  <div className="card">
-    <div className="background" />
-    <div className="logo">{title}</div>
+}: SocialCardProps) => {
+  const [showSocial, setShowSocial] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-    {socialLinks.map((link, index) => (
-      <SocialBox
-        key={index}
-        href={link.href}
-        icon={link.icon}
-        className={link.className}
-        delay={link.delay}
-      />
-    ))}
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
-    <div className="box box4" style={{ transitionDelay: "0.6s" }}>
-      <Linkedin className="w-6 h-6 text-white" />
+  const handleCardClick = () => {
+    if (isMobile && !showSocial) {
+      setShowSocial(true);
+    }
+  };
+
+  return (
+    <div 
+      className="card" 
+      onClick={handleCardClick}
+      onMouseEnter={() => !isMobile && setShowSocial(true)}
+      onMouseLeave={() => !isMobile && setShowSocial(false)}
+    >
+      <div className="background" />
+      <div className="logo">{title}</div>
+
+      {socialLinks.map((link, index) => (
+        <SocialBox
+          key={index}
+          href={link.href}
+          icon={link.icon}
+          className={link.className}
+          delay={link.delay}
+          showSocial={showSocial}
+          isMobile={isMobile}
+        />
+      ))}
+
+      <div className="box box4" style={{ transitionDelay: "0.6s" }}>
+        <Linkedin className="w-6 h-6 text-white" />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export const Component = () => {
   return (

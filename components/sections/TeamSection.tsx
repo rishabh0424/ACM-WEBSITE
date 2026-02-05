@@ -74,37 +74,37 @@ const officeMembers: OfficeMember[] = [
   },
   {
     id: '02',
-    name: 'Tamanna Arora',
+    name: 'Bhakti',
     position: 'Vice President',
-    image: '/office-bearers/TAMANNA.png',
+    image: '/office-bearers/BHAKTI.png',
     bio: 'Supporting leadership and strategic initiatives',
     social: {
-      linkedin: 'https://linkedin.com/in/tamannaarora',
-      twitter: 'https://twitter.com/tamannaarora',
+      linkedin: 'https://linkedin.com/in/bhakti',
       email: 'vicepresident@acm.org'
     }
   },
   {
     id: '03',
     name: 'Ayush Swamy',
-    position: 'Secretary',
+    position: 'Treasurer',
     image: '/office-bearers/AYUSH.png',
-    bio: 'Managing operations and communications',
+    bio: 'Overseeing financial planning and resources',
     social: {
       linkedin: 'https://linkedin.com/in/ayushswamy',
       github: 'https://github.com/ayushswamy',
-      email: 'secretary@acm.org'
+      email: 'treasurer@acm.org'
     }
   },
   {
     id: '04',
-    name: 'Bhakti',
-    position: 'Treasurer',
-    image: '/office-bearers/BHAKTI.png',
-    bio: 'Overseeing financial planning and resources',
+    name: 'Tamanna Arora',
+    position: 'General Secretary',
+    image: '/office-bearers/TAMANNA.png',
+    bio: 'Managing operations and communications',
     social: {
-      linkedin: 'https://linkedin.com/in/bhakti',
-      email: 'treasurer@acm.org'
+      linkedin: 'https://linkedin.com/in/tamannaarora',
+      twitter: 'https://twitter.com/tamannaarora',
+      email: 'secretary@acm.org'
     }
   },
   {
@@ -128,9 +128,9 @@ const kineticMembers = officeMembers.map(m => ({
   role: m.position,
   image: m.image,
   instagram: m.id === '01' ? 'https://www.instagram.com/_rajyavardhan_rathore_/' :
-             m.id === '02' ? 'https://www.instagram.com/tamanna_arora54' :
+             m.id === '02' ? 'https://www.instagram.com/bhakttiix' :
              m.id === '03' ? 'https://www.instagram.com/ayush_swamy' :
-             m.id === '04' ? 'https://www.instagram.com/bhakttiix' :
+             m.id === '04' ? 'https://www.instagram.com/tamanna_arora54' :
              m.id === '05' ? 'https://www.instagram.com/__.aditya_agrawal' : undefined
 }))
 
