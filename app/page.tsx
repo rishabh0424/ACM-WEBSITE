@@ -78,6 +78,9 @@ export default function HomePage() {
             <section id="hero" className="min-h-screen">
               <ParticleTextEffect words={["WELCOME TO", "ACM FAMILY", "INNOVATE", "CREATE", "INSPIRE"]} />
             </section>
+            <section id="why-choose-us" className="h-screen">
+              <WhyChooseUsSection />
+            </section>
             <section id="team" className="min-h-screen bg-transparent relative z-20">
               <TeamSection />
             </section>
@@ -86,9 +89,6 @@ export default function HomePage() {
             </section>
             {!isMobile && (
               <>
-                <section id="why-choose-us" className="h-screen">
-                  <WhyChooseUsSection />
-                </section>
                 <section id="about" className="min-h-screen">
                   <AboutSection3 />
                 </section>

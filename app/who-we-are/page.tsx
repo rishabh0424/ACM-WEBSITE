@@ -17,6 +17,15 @@ export default function WhoWeArePage() {
 
   const [currentImage, setCurrentImage] = useState(0);
 
+  // Auto-swipe effect
+  useEffect(() => {
+    const autoSwipe = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 3000); // Change image every 3 seconds
+
+    return () => clearInterval(autoSwipe);
+  }, []);
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -29,7 +38,7 @@ export default function WhoWeArePage() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [images.length]);
 
   const images = [
     "/photos/20762853-f930-46f7-84d0-2f23c6e4f373.jpg",

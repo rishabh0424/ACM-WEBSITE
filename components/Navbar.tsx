@@ -2,15 +2,16 @@
 
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { Menu, X, ChevronDown, Bell } from 'lucide-react'
+import { Menu, X, ChevronDown, Bell, Home, Info, Lightbulb, Calendar, Users, UserPlus, Grid3x3 } from 'lucide-react'
+import CircularNavigation from '@/components/ui/circular-navigation-bar'
 
 const navItems = [
-  { name: 'About', href: '#about' },
-  { name: 'Why Us', href: '#why-choose-us' },
-  { name: 'Domains', href: '#domains' },
+  { name: 'About', href: '/who-we-are' },
+  { name: 'Why Us', href: '/why-choose-acm' },
+  { name: 'Domains', href: '/domains' },
   { 
     name: 'Events', 
-    href: '#events',
+    href: '/events',
     dropdown: [
       { name: 'DDC', href: '/events/ddc' },
       { name: 'Infuturum', href: '/events/infuturum' },
@@ -18,13 +19,32 @@ const navItems = [
     ]
   },
   { name: 'Team', href: '#team' },
-  { name: 'Join', href: '#join' },
+  { name: 'Join', href: '/join' },
 ]
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [eventsOpen, setEventsOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [circularMenuOpen, setCircularMenuOpen] = useState(false)
+
+  const mobileNavItems = [
+    { name: 'Home', icon: Home, href: '/' },
+    { name: 'About', icon: Info, href: '/who-we-are' },
+    { name: 'Why Us', icon: Lightbulb, href: '/why-choose-acm' },
+    { name: 'Domains', icon: Grid3x3, href: '/domains' },
+    { name: 'Events', icon: Calendar, href: '/events' },
+    { name: 'Team', icon: Users, href: '#team' },
+    { name: 'Join', icon: UserPlus, href: '/join' },
+  ]
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
@@ -122,6 +142,7 @@ export default function Navbar() {
             ))}
             
             <motion.button
+              onClick={() => window.location.href = '/join'}
               className="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -133,13 +154,22 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <motion.button
             className="md:hidden text-white"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => isMobile ? setCircularMenuOpen(!circularMenuOpen) : setIsOpen(!isOpen)}
             whileTap={{ scale: 0.95 }}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            <Menu size={24} />
           </motion.button>
         </div>
       </div>
+
+      {/* Circular Navigation for Mobile */}
+      {isMobile && (
+        <CircularNavigation
+          navItems={mobileNavItems}
+          isOpen={circularMenuOpen}
+          toggleMenu={() => setCircularMenuOpen(!circularMenuOpen)}
+        />
+      )}
 
       {/* Mobile Menu */}
       <motion.div
@@ -198,7 +228,10 @@ export default function Navbar() {
               </a>
             )
           ))}
-          <button className="w-full px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white font-medium">
+          <button 
+            onClick={() => window.location.href = '/join'}
+            className="w-full px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white font-medium"
+          >
             Join Now
           </button>
         </div>

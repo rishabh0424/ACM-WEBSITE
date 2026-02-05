@@ -322,11 +322,11 @@ export function ParticleTextEffect({ words = ["WELCOME TO", "ACM FAMILY", "INNOV
       
       {/* Logos at Bottom */}
       <div className="absolute bottom-4 sm:bottom-8 left-0 right-0 z-10 pointer-events-none px-4">
-        <div className="flex items-center justify-center gap-12 sm:gap-24 md:gap-64">
-          <div className="w-20 h-20 sm:w-32 sm:h-32 md:w-48 md:h-48">
+        <div className="flex items-center justify-center gap-8 sm:gap-24 md:gap-64">
+          <div className="w-32 h-32 sm:w-36 sm:h-36 md:w-48 md:h-48">
             <img src="/photos/scscet-logo.png" alt="SCSCET" className="w-full h-full object-contain" />
           </div>
-          <div className="w-20 h-20 sm:w-32 sm:h-32 md:w-48 md:h-48">
+          <div className="w-32 h-32 sm:w-36 sm:h-36 md:w-48 md:h-48">
             <img src="/photos/bennett-logo.png" alt="Bennett" className="w-full h-full object-contain" />
           </div>
         </div>
