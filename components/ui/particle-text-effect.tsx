@@ -312,6 +312,26 @@ export function ParticleTextEffect({ words = ["WELCOME TO", "ACM FAMILY", "INNOV
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
       />
+      
+      {/* ACM CHAPTER Title */}
+      <div className="absolute top-12 sm:top-16 left-0 right-0 z-10 text-center pointer-events-none px-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-wider text-white/90 drop-shadow-2xl">
+          ACM CHAPTER
+        </h1>
+      </div>
+      
+      {/* Logos at Bottom */}
+      <div className="absolute bottom-4 sm:bottom-8 left-0 right-0 z-10 pointer-events-none px-4">
+        <div className="flex items-center justify-center gap-12 sm:gap-24 md:gap-64">
+          <div className="w-20 h-20 sm:w-32 sm:h-32 md:w-48 md:h-48">
+            <img src="/photos/scscet-logo.png" alt="SCSCET" className="w-full h-full object-contain" />
+          </div>
+          <div className="w-20 h-20 sm:w-32 sm:h-32 md:w-48 md:h-48">
+            <img src="/photos/bennett-logo.png" alt="Bennett" className="w-full h-full object-contain" />
+          </div>
+        </div>
+      </div>
+      
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none" />
     </div>
   )

@@ -20,6 +20,14 @@ export default function HomePage() {
   const [showLightning, setShowLightning] = useState(false)
   const [showIntro, setShowIntro] = useState(false)
   const [introComplete, setIntroComplete] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -70,24 +78,28 @@ export default function HomePage() {
             <section id="hero" className="min-h-screen">
               <ParticleTextEffect words={["WELCOME TO", "ACM FAMILY", "INNOVATE", "CREATE", "INSPIRE"]} />
             </section>
-            <section id="why-choose-us" className="h-screen">
-              <WhyChooseUsSection />
-            </section>
-            <section id="about" className="min-h-screen">
-              <AboutSection3 />
-            </section>
-            <section id="domains" className="min-h-screen bg-transparent">
-              <DomainsSection />
-            </section>
             <section id="team" className="min-h-screen bg-transparent relative z-20">
               <TeamSection />
             </section>
             <section id="events" className="bg-transparent">
               <EventsSection />
             </section>
-            <section id="join" className="min-h-screen">
-              <JoinSection />
-            </section>
+            {!isMobile && (
+              <>
+                <section id="why-choose-us" className="h-screen">
+                  <WhyChooseUsSection />
+                </section>
+                <section id="about" className="min-h-screen">
+                  <AboutSection3 />
+                </section>
+                <section id="domains" className="min-h-screen bg-transparent">
+                  <DomainsSection />
+                </section>
+                <section id="join" className="min-h-screen">
+                  <JoinSection />
+                </section>
+              </>
+            )}
           </main>
           <Footer />
         </div>

@@ -10,6 +10,52 @@ export default function HeroSection() {
 
       {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+        {/* AI SOCIETY Title */}
+        <motion.h1
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black mb-8 sm:mb-12 tracking-wider"
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent drop-shadow-2xl">
+            AI SOCIETY
+          </span>
+        </motion.h1>
+
+        {/* Logos Section */}
+        <motion.div
+          className="flex items-center justify-center gap-8 sm:gap-12 md:gap-20 mb-12 sm:mb-16"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {/* SCSCET Logo - Left */}
+          <motion.div
+            className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 flex items-center justify-center bg-blue-500/10 rounded-2xl border-2 border-blue-500/30"
+            whileHover={{ scale: 1.1, y: -5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <img
+              src="/scscet-logo.png"
+              alt="SCSCET Logo"
+              className="w-full h-full object-contain p-4"
+            />
+          </motion.div>
+
+          {/* Bennett University Logo - Right */}
+          <motion.div
+            className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 flex items-center justify-center bg-blue-500/10 rounded-2xl border-2 border-blue-500/30"
+            whileHover={{ scale: 1.1, y: -5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <img
+              src="/bennett-logo.png"
+              alt="Bennett University Logo"
+              className="w-full h-full object-contain p-4"
+            />
+          </motion.div>
+        </motion.div>
+
         {/* Badge */}
         <motion.div
           className="inline-flex items-center px-4 py-2 rounded-full border border-border-subtle bg-dark-elevated/50 text-text-muted text-xs sm:text-sm font-medium mb-6 sm:mb-8"

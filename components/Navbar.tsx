@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, Bell } from 'lucide-react'
 
 const navItems = [
   { name: 'About', href: '#about' },
@@ -59,6 +59,17 @@ export default function Navbar() {
 
           {/* Desktop Navigation - Right Corner */}
           <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
+            {/* Announcement Button */}
+            <motion.a
+              href="/announcements"
+              className="text-gray-300 hover:text-blue-400 transition-colors relative"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              title="Announcements"
+            >
+              <Bell size={20} />
+            </motion.a>
+
             {navItems.map((item, index) => (
               item.dropdown ? (
                 <div key={item.name} className="relative group">
@@ -143,6 +154,16 @@ export default function Navbar() {
         transition={{ duration: 0.3 }}
       >
         <div className="px-4 py-4 space-y-4">
+          {/* Announcement Button Mobile */}
+          <a
+            href="/announcements"
+            className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors"
+            onClick={() => setIsOpen(false)}
+          >
+            <Bell size={18} />
+            Announcements
+          </a>
+
           {navItems.map((item) => (
             item.dropdown ? (
               <div key={item.name}>

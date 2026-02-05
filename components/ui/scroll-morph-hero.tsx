@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import AmazonQPrompt from "@/components/ui/amazon-q-prompt";
 
 export type AnimationPhase = "scatter" | "line" | "circle" | "arc";
 
@@ -138,6 +139,7 @@ export default function IntroAnimation() {
 
     return (
         <div ref={containerRef} className="relative w-full h-full bg-transparent overflow-hidden -mt-1">
+            <AmazonQPrompt message="Click here!" targetSelector=".why-acm-button" />
             <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
             <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none z-20" />
             <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden px-4 py-8">
@@ -148,7 +150,7 @@ export default function IntroAnimation() {
                     transition={{ duration: 2, ease: "easeInOut" }}
                     className="absolute z-10 flex flex-col items-center justify-center text-center pointer-events-none top-1/2 -translate-y-1/2 px-4"
                 >
-                    <h1 className="text-3xl font-medium tracking-tight text-white md:text-4xl">
+                    <h1 className="why-acm-button text-3xl font-medium tracking-tight text-white md:text-4xl">
                         Why Choose ACM?
                     </h1>
                     <p className="mt-4 text-xs font-bold tracking-[0.2em] text-gray-400">
