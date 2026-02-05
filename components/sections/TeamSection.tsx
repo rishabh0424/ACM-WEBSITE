@@ -337,11 +337,11 @@ const TeamCard = ({ member, index, onClick }: { member: TeamMember; index: numbe
           }}
         />
 
-        {/* Thunder Particles */}
-        {typeof window !== 'undefined' && window.innerWidth >= 768 && [...Array(3)].map((_, i) => (
+        {/* Thunder Particles - Desktop Only */}
+        {[...Array(3)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100"
+            className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 hidden md:block"
             style={{
               left: `${20 + i * 30}%`,
               top: `${10 + i * 20}%`,
@@ -461,15 +461,15 @@ export default function TeamSection() {
     <>
     <motion.section 
       id="team" 
-      className="py-12 md:py-20 bg-transparent relative overflow-hidden" 
+      className="py-8 md:py-20 bg-transparent relative overflow-visible min-h-screen" 
       ref={ref}
       initial="hidden"
       whileInView="visible"
-      viewport={viewportConfig}
+      viewport={{ once: false, amount: 0.1 }}
       variants={fadeUp}
     >
       {/* Animated Background Particles */}
-      <motion.div variants={parallaxSlow}>
+      <motion.div variants={parallaxSlow} className="hidden md:block">
         {particles.slice(0, 6).map((particle) => (
           <motion.div
             key={particle.id}
@@ -566,7 +566,7 @@ export default function TeamSection() {
 
         {/* Team Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"

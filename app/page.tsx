@@ -68,7 +68,7 @@ export default function HomePage() {
           <Navbar />
           <main className="space-y-0">
             <section id="hero" className="min-h-screen">
-              <ParticleTextEffect words={["HELLO", "WELCOME TO", "ACM BU", "INNOVATE", "CREATE", "INSPIRE"]} />
+              <ParticleTextEffect words={["WELCOME TO", "ACM FAMILY", "INNOVATE", "CREATE", "INSPIRE"]} />
             </section>
             <section id="why-choose-us" className="h-screen">
               <WhyChooseUsSection />
@@ -79,7 +79,7 @@ export default function HomePage() {
             <section id="domains" className="min-h-screen bg-transparent">
               <DomainsSection />
             </section>
-            <section id="team" className="min-h-screen bg-transparent">
+            <section id="team" className="min-h-screen bg-transparent relative z-20">
               <TeamSection />
             </section>
             <section id="events" className="bg-transparent">
