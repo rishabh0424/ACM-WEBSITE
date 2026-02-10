@@ -6,7 +6,16 @@ import { Code, Users, CheckCircle2, ArrowRight, Mouse } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import { FAQ } from '@/components/ui/faq-tabs'
-import { InteractiveRobotSpline } from '@/components/ui/interactive-3d-robot'
+import dynamic from "next/dynamic";
+
+const InteractiveRobotSpline = dynamic(
+  () =>
+    import("@/components/ui/interactive-3d-robot").then(
+      (mod) => mod.InteractiveRobotSpline
+    ),
+  { ssr: false }
+);
+
 
 export default function JoinPage() {
   const [step, setStep] = useState(1)

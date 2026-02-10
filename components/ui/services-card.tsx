@@ -4,21 +4,23 @@ import * as React from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
-import useEmblaCarousel, {
-  type EmblaCarouselType,
-  type EmblaOptionsType,
-} from "embla-carousel-react";
+
+import useEmblaCarousel from "embla-carousel-react";
+import type { EmblaCarouselType } from "embla-carousel";
 
 type CarouselApi = EmblaCarouselType | undefined;
+
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
 type CarouselOptions = UseCarouselParameters[0];
 type CarouselPlugin = UseCarouselParameters[1];
+
 type CarouselProps = {
   opts?: CarouselOptions;
   plugins?: CarouselPlugin;
   orientation?: "horizontal" | "vertical";
   setApi?: (api: CarouselApi) => void;
 };
+
 type CarouselContextProps = {
   carouselRef: ReturnType<typeof useEmblaCarousel>[0];
   api: ReturnType<typeof useEmblaCarousel>[1];
@@ -33,7 +35,7 @@ const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 function useCarousel() {
   const context = React.useContext(CarouselContext);
   if (!context) {
-    throw new Error("useCarousel must be used within a <Carousel />");
+    throw new Error("useCarousel must be used within Carousel");
   }
   return context;
 }
@@ -52,15 +54,16 @@ const Carousel = React.forwardRef<
       children,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [carouselRef, api] = useEmblaCarousel(
       {
         ...opts,
         axis: orientation === "horizontal" ? "x" : "y",
       },
-      plugins,
+      plugins
     );
+
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
 
@@ -78,19 +81,6 @@ const Carousel = React.forwardRef<
       api?.scrollNext();
     }, [api]);
 
-    const handleKeyDown = React.useCallback(
-      (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if (event.key === "ArrowLeft") {
-          event.preventDefault();
-          scrollPrev();
-        } else if (event.key === "ArrowRight") {
-          event.preventDefault();
-          scrollNext();
-        }
-      },
-      [scrollPrev, scrollNext],
-    );
-
     React.useEffect(() => {
       if (!api || !setApi) return;
       setApi(api);
@@ -99,10 +89,9 @@ const Carousel = React.forwardRef<
     React.useEffect(() => {
       if (!api) return;
       onSelect(api);
-      api.on("reInit", onSelect);
       api.on("select", onSelect);
       return () => {
-        api?.off("select", onSelect);
+        api.off("select", onSelect);
       };
     }, [api, onSelect]);
 
@@ -110,7 +99,7 @@ const Carousel = React.forwardRef<
       <CarouselContext.Provider
         value={{
           carouselRef,
-          api: api,
+          api,
           opts,
           orientation,
           scrollPrev,
@@ -121,7 +110,6 @@ const Carousel = React.forwardRef<
       >
         <div
           ref={ref}
-          onKeyDownCapture={handleKeyDown}
           className={cn("relative", className)}
           role="region"
           aria-roledescription="carousel"
@@ -131,8 +119,9 @@ const Carousel = React.forwardRef<
         </div>
       </CarouselContext.Provider>
     );
-  },
+  }
 );
+
 Carousel.displayName = "Carousel";
 
 const CarouselContent = React.forwardRef<
@@ -140,6 +129,7 @@ const CarouselContent = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   const { carouselRef, orientation } = useCarousel();
+
   return (
     <div ref={carouselRef} className="overflow-hidden">
       <div
@@ -147,13 +137,14 @@ const CarouselContent = React.forwardRef<
         className={cn(
           "flex",
           orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
-          className,
+          className
         )}
         {...props}
       />
     </div>
   );
 });
+
 CarouselContent.displayName = "CarouselContent";
 
 const CarouselItem = React.forwardRef<
@@ -161,6 +152,7 @@ const CarouselItem = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   const { orientation } = useCarousel();
+
   return (
     <div
       ref={ref}
@@ -169,12 +161,13 @@ const CarouselItem = React.forwardRef<
       className={cn(
         "min-w-0 shrink-0 grow-0 basis-full",
         orientation === "horizontal" ? "pl-4" : "pt-4",
-        className,
+        className
       )}
       {...props}
     />
   );
 });
+
 CarouselItem.displayName = "CarouselItem";
 
 const CarouselPrev = React.forwardRef<
@@ -182,23 +175,24 @@ const CarouselPrev = React.forwardRef<
   React.ButtonHTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => {
   const { scrollPrev, canScrollPrev } = useCarousel();
+
   return (
     <button
       ref={ref}
-      className={cn(
-        "absolute h-10 w-10 rounded-full bg-foreground/10 border-0 hover:bg-foreground/20 text-foreground",
-        "left-2 top-1/2 -translate-y-1/2",
-        className,
-      )}
       onClick={scrollPrev}
       disabled={!canScrollPrev}
+      className={cn(
+        "absolute h-10 w-10 rounded-full bg-foreground/10 hover:bg-foreground/20",
+        "left-2 top-1/2 -translate-y-1/2",
+        className
+      )}
       {...props}
     >
       <ArrowLeft className="h-4 w-4" />
-      <span className="sr-only">Previous slide</span>
     </button>
   );
 });
+
 CarouselPrev.displayName = "CarouselPrev";
 
 const CarouselNext = React.forwardRef<
@@ -206,24 +200,27 @@ const CarouselNext = React.forwardRef<
   React.ButtonHTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => {
   const { scrollNext, canScrollNext } = useCarousel();
+
   return (
     <button
       ref={ref}
-      className={cn(
-        "absolute h-10 w-10 rounded-full bg-foreground/10 border-0 hover:bg-foreground/20 text-foreground",
-        "right-2 top-1/2 -translate-y-1/2",
-        className,
-      )}
       onClick={scrollNext}
       disabled={!canScrollNext}
+      className={cn(
+        "absolute h-10 w-10 rounded-full bg-foreground/10 hover:bg-foreground/20",
+        "right-2 top-1/2 -translate-y-1/2",
+        className
+      )}
       {...props}
     >
       <ArrowRight className="h-4 w-4" />
-      <span className="sr-only">Next slide</span>
     </button>
   );
 });
+
 CarouselNext.displayName = "CarouselNext";
+
+/* ================= SERVICE CARDS ================= */
 
 export interface Service {
   number: string;
@@ -233,76 +230,62 @@ export interface Service {
   gradient: string;
 }
 
-const ServiceCard = ({ service, index }: { service: Service; index: number }) => {
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        delay: index * 0.1,
-      },
-    },
-  };
-
+const ServiceCard = ({
+  service,
+  index,
+}: {
+  service: Service;
+  index: number;
+}) => {
   const Icon = service.icon;
 
   return (
     <motion.div
-      variants={cardVariants}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1 }}
       className={cn(
         "relative flex h-[450px] w-full flex-col justify-between overflow-hidden rounded-3xl p-8 bg-gradient-to-r",
         service.gradient
       )}
     >
-      <div className="z-10 flex flex-col items-start text-left">
-        <span className="mb-8 text-sm font-mono text-blue-900">
-          ( {service.number} )
-        </span>
-        {Icon && <Icon className="mb-auto h-12 w-12 text-blue-900" />}
-      </div>
       <div className="z-10">
-        <h3 className="mb-2 text-lg font-semibold uppercase tracking-wider text-blue-900">
+        <span className="text-sm font-mono text-blue-900">
+          ({service.number})
+        </span>
+        {Icon && <Icon className="mt-4 h-12 w-12 text-blue-900" />}
+      </div>
+
+      <div className="z-10">
+        <h3 className="text-lg font-semibold uppercase text-blue-900">
           {service.title}
         </h3>
         <p className="text-sm text-blue-800">{service.description}</p>
       </div>
-
-      <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
     </motion.div>
   );
 };
 
 export const ServiceCarousel = ({ services }: { services: Service[] }) => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true });
 
   return (
     <div className="w-full px-4">
-      <Carousel
-        ref={ref}
-        opts={{
-          align: "start",
-          loop: true,
-        }}
-        className="relative"
-      >
+      <Carousel ref={ref} opts={{ loop: true }} className="relative">
         <motion.div
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          transition={{ staggerChildren: 0.1 }}
         >
           <CarouselContent>
             {services.map((service, index) => (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <div className="p-1">
-                  <ServiceCard service={service} index={index} />
-                </div>
+                <ServiceCard service={service} index={index} />
               </CarouselItem>
             ))}
           </CarouselContent>
         </motion.div>
+
         <CarouselPrev />
         <CarouselNext />
       </Carousel>
