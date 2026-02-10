@@ -90,7 +90,7 @@ const Footer = () => {
 
   return (
     <motion.footer 
-      className="relative bg-transparent border-t border-gray-800/50 overflow-visible"
+      className="relative bg-transparent border-t border-gray-800/50 overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={viewportConfig}

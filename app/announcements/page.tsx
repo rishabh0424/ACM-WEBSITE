@@ -1,118 +1,222 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Bell, Calendar, ArrowLeft } from 'lucide-react'
-import Link from 'next/link'
+import { Bell, Calendar, AlertTriangle, BookOpen, Clock, User, Zap, Users, Lightbulb, Code } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import AnnouncementsHero from '@/components/ui/announcements-hero'
+import HorizontalFlipGallery from '@/components/ui/horizontal-flip-gallery'
+import NewsletterPage from '@/components/ui/newsletter-page'
+import { ServiceCarousel, type Service } from '@/components/ui/services-card'
 
-const announcements = [
+const notices = [
   {
     id: 1,
-    title: 'Upcoming Workshop: Web Development Bootcamp',
-    date: '2024-01-15',
-    content: 'Join us for an intensive 3-day web development bootcamp covering React, Next.js, and modern web technologies.',
-    category: 'Workshop',
-    priority: 'high'
+    title: 'Exam Schedule Change - Immediate Action Required',
+    date: '2024-02-05',
+    content: 'Due to unforeseen circumstances, the mid-term examination schedule has been revised. Please check the updated schedule on the portal immediately.',
+    priority: 'critical',
+    type: 'notice'
   },
   {
     id: 2,
-    title: 'ACM Membership Drive 2024',
-    date: '2024-01-10',
-    content: 'Register now for ACM membership and get access to exclusive events, workshops, and networking opportunities.',
-    category: 'General',
-    priority: 'medium'
+    title: 'Workshop Registration Deadline Extended',
+    date: '2024-02-03',
+    content: 'The registration deadline for the upcoming Web Development Workshop has been extended to February 10th. Don\'t miss this opportunity!',
+    priority: 'high',
+    type: 'notice'
+  }
+]
+
+const posts = [
+  {
+    id: 1,
+    title: 'DDC - Design & Development Challenge',
+    date: '2024-02-04',
+    author: 'ACM Events Team',
+    excerpt: 'Our flagship event bringing together designers and developers to create innovative solutions. Experience the thrill of collaborative problem-solving.',
+    category: 'Events',
+    readTime: '5 min read',
+    type: 'blog'
   },
   {
-    id: 3,
-    title: 'Hackathon Registration Open',
-    date: '2024-01-08',
-    content: 'Annual ACM Hackathon is here! Form your teams and register before the deadline.',
-    category: 'Event',
-    priority: 'high'
+    id: 2,
+    title: 'Infuturum - Future of Technology',
+    date: '2024-02-02',
+    author: 'ACM Tech Team',
+    excerpt: 'A visionary event exploring emerging technologies and their impact on society. Join us in shaping the future of innovation.',
+    category: 'Events',
+    readTime: '6 min read',
+    type: 'blog'
+  }
+]
+
+const announcements: Service[] = [
+  {
+    number: "001",
+    title: "Web Development Bootcamp",
+    description: "Join us for an intensive 3-day web development bootcamp covering React, Next.js, and modern web technologies.",
+    icon: Code,
+    gradient: "from-blue-100 to-blue-200 dark:from-blue-900/50 dark:to-blue-800/50"
+  },
+  {
+    number: "002",
+    title: "ACM Membership Drive 2024",
+    description: "Register now for ACM membership and get access to exclusive events, workshops, and networking opportunities.",
+    icon: Users,
+    gradient: "from-purple-100 to-purple-200 dark:from-purple-900/50 dark:to-purple-800/50"
+  },
+  {
+    number: "003",
+    title: "Hackathon Registration Open",
+    description: "Annual ACM Hackathon is here! Form your teams and register before the deadline.",
+    icon: Zap,
+    gradient: "from-orange-100 to-orange-200 dark:from-orange-900/50 dark:to-orange-800/50"
+  },
+  {
+    number: "004",
+    title: "Innovation Workshop",
+    description: "Explore cutting-edge technologies and learn from industry experts in this hands-on workshop.",
+    icon: Lightbulb,
+    gradient: "from-green-100 to-green-200 dark:from-green-900/50 dark:to-green-800/50"
   }
 ]
 
 export default function AnnouncementsPage() {
+  const router = useRouter();
+  
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white">
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none" />
+    <div className="min-h-screen bg-black text-white">
+      <AnnouncementsHero />
       
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-12"
+          className="min-h-screen flex flex-col justify-center py-8"
         >
-          <Link href="/">
-            <motion.button
-              className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8"
-              whileHover={{ x: -5 }}
-            >
-              <ArrowLeft size={20} />
-              Back to Home
-            </motion.button>
-          </Link>
-
-          <div className="flex items-center gap-4 mb-4">
-            <motion.div
-              className="p-3 bg-blue-500/20 rounded-xl border border-blue-500/30"
-              whileHover={{ scale: 1.05 }}
-            >
-              <Bell className="w-8 h-8 text-blue-400" />
-            </motion.div>
-            <h1 className="text-4xl md:text-5xl font-bold">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Announcements
-              </span>
-            </h1>
-          </div>
-          <p className="text-gray-400 text-lg">Stay updated with the latest news and events from ACM</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+            General Announcements
+          </h2>
+          <p className="text-gray-400 text-base mb-6">Check out what's happening in our community</p>
+          
+          <ServiceCarousel services={announcements} />
         </motion.div>
 
-        <div className="space-y-6">
-          {announcements.map((announcement, index) => (
-            <motion.div
-              key={announcement.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300"
-              whileHover={{ scale: 1.02, y: -5 }}
-            >
-              {announcement.priority === 'high' && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="min-h-screen flex flex-col justify-center py-8"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+            Important Notices
+          </h2>
+          
+          <div className="space-y-6 mb-16">
+            {notices.map((notice, index) => (
+              <motion.div
+                key={notice.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group relative bg-gray-900/50 backdrop-blur-sm border border-orange-800/30 rounded-2xl p-6 hover:border-orange-500/50 transition-all duration-300"
+                whileHover={{ scale: 1.02, y: -5 }}
+              >
                 <div className="absolute top-4 right-4">
-                  <span className="px-3 py-1 bg-red-500/20 text-red-400 text-xs font-semibold rounded-full border border-red-500/30">
-                    Important
+                  <span className={`px-3 py-1 text-xs font-semibold rounded-full border ${
+                    notice.priority === 'critical' 
+                      ? 'bg-red-500/20 text-red-400 border-red-500/30' 
+                      : 'bg-orange-500/20 text-orange-400 border-orange-500/30'
+                  }`}>
+                    {notice.priority.toUpperCase()}
                   </span>
                 </div>
-              )}
 
-              <div className="flex items-center gap-2 mb-3">
-                <span className="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full border border-blue-500/30">
-                  {announcement.category}
-                </span>
-                <div className="flex items-center gap-1 text-gray-500 text-sm">
-                  <Calendar size={14} />
-                  {new Date(announcement.date).toLocaleDateString('en-US', { 
-                    month: 'short', 
-                    day: 'numeric', 
-                    year: 'numeric' 
-                  })}
+                <div className="flex items-center gap-2 mb-3">
+                  <AlertTriangle className="w-5 h-5 text-orange-400" />
+                  <div className="flex items-center gap-1 text-gray-500 text-sm">
+                    <Clock size={14} />
+                    {new Date(notice.date).toLocaleDateString('en-US', { 
+                      month: 'short', 
+                      day: 'numeric', 
+                      year: 'numeric' 
+                    })}
+                  </div>
                 </div>
-              </div>
 
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
-                {announcement.title}
-              </h3>
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors">
+                  {notice.title}
+                </h3>
 
-              <p className="text-gray-400 leading-relaxed">
-                {announcement.content}
-              </p>
+                <p className="text-gray-400 leading-relaxed">
+                  {notice.content}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />
-            </motion.div>
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="min-h-screen flex flex-col justify-center py-8"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+            Newsletter & Blog
+          </h2>
+          
+          <div className="mb-8 flex justify-center">
+            <HorizontalFlipGallery />
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {posts.map((post, index) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group relative bg-gray-900/50 backdrop-blur-sm border border-purple-800/30 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 cursor-pointer"
+                whileHover={{ scale: 1.02, y: -5 }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <span className="px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full border border-purple-500/30">
+                    {post.category}
+                  </span>
+                  <span className="text-gray-500 text-sm">{post.readTime}</span>
+                </div>
+
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
+                  {post.title}
+                </h3>
+
+                <p className="text-gray-400 leading-relaxed mb-4">
+                  {post.excerpt}
+                </p>
+
+                <div className="flex items-center gap-4 text-sm text-gray-500">
+                  <div className="flex items-center gap-1">
+                    <User size={14} />
+                    {post.author}
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Calendar size={14} />
+                    {new Date(post.date).toLocaleDateString('en-US', { 
+                      month: 'short', 
+                      day: 'numeric', 
+                      year: 'numeric' 
+                    })}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Newsletter Section */}
+        <NewsletterPage />
       </div>
     </div>
   )

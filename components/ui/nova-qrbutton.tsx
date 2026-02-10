@@ -42,7 +42,7 @@ const NeonQrButton = () => {
       {/* Light pastel popover card */}
       <div
         className={`
-          absolute left-1/2 bottom-full mb-3
+          absolute left-1/2 bottom-full mb-3 z-50
           w-52 h-52
           -translate-x-1/2
           rounded-2xl
