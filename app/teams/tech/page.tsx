@@ -35,43 +35,43 @@ export default function TechTeamPage() {
         />
         <motion.button
           onClick={() => router.back()}
-          className="absolute top-6 right-6 z-20 flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/20 transition-all"
+          className="absolute top-6 right-6 z-20 flex items-center gap-2 px-3 py-2 md:px-4 md:py-2 rounded-lg bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/20 transition-all text-xs md:text-sm"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <ArrowLeft size={20} />
-          <span className="text-sm font-semibold">Back</span>
+          <ArrowLeft size={16} />
+          <span className="font-semibold hidden sm:inline">Back</span>
         </motion.button>
       </section>
 
-      <section className="py-20 px-6 max-w-7xl mx-auto">
+      <section className="py-12 md:py-20 px-4 md:px-6 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Senior Core</h2>
-          <p className="text-gray-400 text-lg">Experienced leaders</p>
+          <h2 className="text-2xl md:text-5xl font-bold mb-2 md:mb-4">Senior Core</h2>
+          <p className="text-gray-400 text-sm md:text-lg">Experienced leaders</p>
         </motion.div>
 
-        <div className="mb-20 h-96">
+        <div className="mb-12 md:mb-20 h-auto md:h-96">
           <DynamicFrameLayout frames={seniorCore} className="" hoverSize={6} gapSize={4} />
         </div>
       </section>
 
-      <section className="py-20 px-6 max-w-7xl mx-auto">
+      <section className="py-12 md:py-20 px-4 md:px-6 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Junior Core</h2>
-          <p className="text-gray-400 text-lg">Rising talents</p>
+          <h2 className="text-2xl md:text-5xl font-bold mb-2 md:mb-4">Junior Core</h2>
+          <p className="text-gray-400 text-sm md:text-lg">Rising talents</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
           {juniorCore.map((member, index) => (
             <motion.div
               key={index}
@@ -79,9 +79,9 @@ export default function TechTeamPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               whileHover={{ scale: 1.05, y: -8 }}
-              className="group relative bg-gradient-to-br from-blue-900/20 to-cyan-900/20 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 hover:border-blue-400/60 transition-all"
+              className="group relative bg-gradient-to-br from-blue-900/20 to-cyan-900/20 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-4 md:p-6 hover:border-blue-400/60 transition-all"
             >
-              <div className="relative w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-blue-400">
+              <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-3 md:mb-4 rounded-full overflow-hidden border-2 border-blue-400">
                 <Image
                   src={member.image}
                   alt={member.name}
@@ -89,8 +89,8 @@ export default function TechTeamPage() {
                   className="object-cover"
                 />
               </div>
-              <h3 className="text-lg font-bold text-white mb-1 text-center">{member.name}</h3>
-              <p className="text-sm text-blue-400 font-semibold text-center">{member.position}</p>
+              <h3 className="text-base md:text-lg font-bold text-white mb-1 text-center">{member.name}</h3>
+              <p className="text-xs md:text-sm text-blue-400 font-semibold text-center">{member.position}</p>
             </motion.div>
           ))}
         </div>
