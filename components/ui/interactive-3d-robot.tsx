@@ -3,10 +3,11 @@
 import { Suspense, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
-const Spline = dynamic(() => import('@splinetool/react-spline'), { 
-  ssr: false,
-  loading: () => <div className="w-full h-full bg-gray-900"></div>
-});
+const Spline = dynamic(
+  () => import('@splinetool/react-spline').then((mod) => mod.default),
+  { ssr: false }
+);
+
 
 interface InteractiveRobotSplineProps {
   scene: string;
