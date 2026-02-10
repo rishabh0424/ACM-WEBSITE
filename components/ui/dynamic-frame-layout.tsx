@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
@@ -76,13 +76,17 @@ export function DynamicFrameLayout({
   const [frames] = useState<Frame[]>(initialFrames)
   const [hovered, setHovered] = useState<{ row: number; col: number } | null>(null)
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+
   const getRowSizes = () => {
+    if (isMobile) return '1fr'
     if (hovered === null) return '1fr 1fr'
     const { row } = hovered
     return row === 0 ? '2fr 1fr' : '1fr 2fr'
   }
 
   const getColSizes = () => {
+    if (isMobile) return '1fr'
     if (hovered === null) return '1fr 1fr 1fr 1fr'
     const { col } = hovered
     const sizes = [0, 1, 2, 3].map((c) => (c === col ? '2fr' : '1fr'))
@@ -119,8 +123,8 @@ export function DynamicFrameLayout({
               transformOrigin,
               transition: 'transform 0.4s ease',
             }}
-            onMouseEnter={() => setHovered({ row, col })}
-            onMouseLeave={() => setHovered(null)}
+            onMouseEnter={() => !isMobile && setHovered({ row, col })}
+            onMouseLeave={() => !isMobile && setHovered(null)}
           >
             <FrameComponent
               image={frame.image}

@@ -1,7 +1,12 @@
 'use client';
 
-import { Suspense, lazy, useEffect } from 'react';
-const Spline = lazy(() => import('@splinetool/react-spline'));
+import { Suspense, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+const Spline = dynamic(() => import('@splinetool/react-spline'), { 
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-gray-900"></div>
+});
 
 interface InteractiveRobotSplineProps {
   scene: string;

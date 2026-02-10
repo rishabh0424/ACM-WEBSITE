@@ -13,7 +13,7 @@ const InteractiveRobotSpline = dynamic(
     import("@/components/ui/interactive-3d-robot").then(
       (mod) => mod.InteractiveRobotSpline
     ),
-  { ssr: false }
+  { ssr: false, loading: () => <div className="w-full h-full bg-gray-900"></div> }
 );
 
 
